@@ -1,14 +1,30 @@
 \chapter{Implementación}
 
-\section{Decisiones de implementación en frontend}
+% TODO: Explicar concretamente lo que se está implementando tanto en backend como en frontend. 
+
+\section{Implementación del frontend}
+
+EL frontend de la aplicación web se realiza con React utilizando los lenguajes de programación \textit{javascript}, \textit{HTML}, y \textit{CSS}.
+
+Para la comunicación del frontend con el backend mediante WebSockets se utiliza el paquete \textit{npm} \textit{reconnecting-websocket} \cite{reconect-ws}. Se decide utilizar este frente a otros ya que reconecta automáticamente si la conexión se cierra por alguna razón y es compatible con \textit{WebSocket Browser API} \cite{api-ws-front}\newline
+
+TODO: explicar organización de ficheros en frontend indicando que cierta división de los módulos hace que la organización del código queda bien repartida teniendo las funcionalidades para poder ver a simple vista implementado ??? \\
 
 % Mirar en mis notas todas las decisiones y controversisas con frontend
-TODO: Decisiones anotadas y problemas u opciones surgidas respecto a la implementación del frontend \\
+TODO: Decisiones de implementación que tengo anotadas y problemas u opciones surgidas respecto a la implementación del frontend \\
 
-\section{Decisiones de implementación en backend}
+\section{Implementación del backend}
+
+El backend de la aplicación se realiza con \textit{.NET Framework 4.8} ya que como se ha explicado en secciones anteriores la implementación es añadir funcionalidad a la aplicación existente. \newline
+
+Para la comunicación con el frontend mediante WebSockets se utiliza la librería \textit{websocket-sharp} \cite{websocket-sharp} en su versión \textit{1.0.3.0}.
+Se decide utilizar esta librería ya que en otra de las funcionalidades de la aplicación existente se utiliza aunque en una versión anterior, y se cree conveniente utilizar algo similar de cara a que internamente en la empresa puedan entender mejor la implementación o reutilizar el código.
+La instalación de esto se realiza mediante el propio Visual Studio, que se ha comentado la sección de herramientras de trabajo que es el entorno de desarrollo utilizado para implementar el backend, utilizando la opción de administrar paquetes NuGet e instalando el nombrado. \newline 
+
+En un primer lugar se propone realizar la comunicación del backend con el frontend utilizando \textit{SignalR} \cite{signalr} pero finalmente se descarta por incompatibilidad con la aplicación actual y simplicidad en la arquitectura software. Se puede ver más información referente a esta decisión en el \hyperref[anexo-b]{Anexo B}. \newline
 
 % Mirar en mis notas todas las decisiones y controversisas con backend
-TODO: Decisiones anotadas y problemas u opciones surgidas respecto a la implementación del backend
+TODO: Decisiones de implementación respecto a ficheros y funciones que tengo anotadas y problemas u opciones surgidas respecto a la implementación del backend
 
 
 % \section{Problemas encontrados}
