@@ -18,20 +18,21 @@ En este capítulo se presenta el contexto del trabajo, así como la motivación 
 
 La compañía realiza todo el proceso de construcción del producto. \\
 
-Por un lado la fabricación del hardware que interactúa con el software entre los que se tienen los terminales que se encuentran en las habitaciones de los pacientes. Estos terminales son pantallas en las que se pueden realizar distintas acciones como por ejemplo disparar y codificar alarmas, registrar presencias de trabajadores, registrar tareas u otras actividades según el sector en el que se encuentren.\\
- 
-Por otro lado la implementación de Helpnex que es el software de gestión diseñado y desarrollado por Ibernex. Helpnex está diseñado para poder adaptarse a cada cliente ya sea por sus necesidades concretas, capacidades, como perfiles de trabajadores, entre otras.
-Además, las soluciones que ofrecen también se pueden integrar con otros sistemas de gestión como Resiplus (muy presente en residencias que quieren transformarse y digitalizarse, pero mantener su programa de gestión). 
-La empresa se encuentra en continua innovación para seguir ofreciendo un sistema actualizado que ayude a optimizar la gestión de residencias y hospitales y así mejorar no solo la calidad de vida de los residentes y pacientes, sino también la labor de los trabajadores con el fin de que puedan invertir más tiempo en lo realmente importante, cuidar de las personas.
+\begin{itemize}
+    \item Por un lado, la fabricación del hardware que interactúa con el software. En esta parte se encuentran los terminales que están en las habitaciones de los pacientes. Estos terminales son pantallas en las que se pueden realizar distintas acciones como por ejemplo disparar y codificar alarmas, registrar presencias de trabajadores, registrar tareas u otras actividades según el sector en el que se encuentren.
+    \item Por otro lado, la implementación de Helpnex que es el software de gestión diseñado y desarrollado por Ibernex. Helpnex está diseñado para poder adaptarse a cada cliente ya sea por sus necesidades concretas, capacidades, como perfiles de trabajadores, entre otras.
+    Además, las soluciones que ofrecen también se pueden integrar con otros sistemas de gestión como Resiplus (muy presente en residencias que quieren transformarse y digitalizarse, pero mantener su programa de gestión). 
+    La empresa se encuentra en continua innovación para seguir ofreciendo un sistema actualizado que ayude a optimizar la gestión de residencias y hospitales y así mejorar no solo la calidad de vida de los residentes y pacientes, sino también la labor de los trabajadores con el fin de que puedan invertir más tiempo en lo realmente importante, cuidar de las personas.
+\end{itemize}
 
-En este contexto la parte del trabajo a realizar (que se explica con más detalle en la siguiente sección) es realizar modificaciones en la implementación de Helpnex.
 
-% \begin{figure}[!h]
-%     \centering
-%     \includegraphics[width=0.8\textwidth,height=6cm]{Imagenes/Arte_abstracto}
-%     \caption{Un pie de foto}
-%     \label{fig:una_etiqueta}
-% \end{figure}
+% Explicar el contexto de este TFG para la empresa
+
+Los clientes que tiene la compañía actualmente trabajan mayormente con aplicaciones de escritorio. Pero Ibernex considera que sería una buena opción que en residencias u hospitales se pueda monitorizar alarmas mediante la visualización de estas en pantallas.\\
+
+Para esto han considerado que una buena solución sería tener una aplicación web en la que se pueda visualizar en tiempo real las alertas de la institución.\\
+
+En este contexto la parte del trabajo a realizar (que se explica con más detalle en la siguiente sección) es realizar modificaciones en la implementación de Helpnex y realizar el frontal, que será el que reciba las alertas en tiempo real, separado de la aplicación actual. 
 
 
 \section{Objetivos y limitaciones}
@@ -45,23 +46,27 @@ Estas alertas pueden ser de dos tipos:
 \end{itemize}
 
 % Hetereogeneidad de tamaños
-Este sistema web servirá para pequeños y grandes escenarios. Es decir será útil para por ejemplo una residencia pequeña en la que el número de clientes, habitaciones y por tanto terminales sea reducido. O el caso contrario en el que se quiera monitorizar las alertas de un hospital de gran tamaño con un alto número de clientes y terminales.
+Este sistema web servirá para pequeños y grandes escenarios. Es decir, será útil para una residencia pequeña en la que el número de clientes, habitaciones y por tanto terminales sea reducido. O el caso contrario en el que se quiera monitorizar las alertas de un hospital de gran tamaño con un alto número de clientes y terminales.\\
 
 % Explicar concretamente el trabajo a realizar - objetivo más detallado
-El trabajo a realizar para llevar a cabo la construcción de la aplicación web consta de dos partes.\\
+El trabajo a realizar para llevar a cabo la construcción de la aplicación web consta de dos partes. En primer lugar, implementar un frontend completo desde cero separado de la aplicación actual de Ibernex, que recibirá las alertas en tiempo real y permitirá visualizar cierta información de estas alertas. En segundo lugar, el desarrollo de un backend que se realiza integrando código en Helpnex aprovechando algunas de las funcionalidades existentes y desarrollando las nuevas funcionalidades necesarias. \\
 
-En primer lugar, implementar un frontend completo desde cero separado de la aplicación actual de Ibernex.\\
-
-En segundo lugar, el desarrollo de un backend que se realiza integrando código en Helpnex aprovechando algunas de las funcionalidades existentes y desarrollando las nuevas funcionalidades necesarias. \newline
-
-La limitación a la hora de realizar el proyecto es que al tener ya una aplicación desarrollada con ciertas tecnologías, se debe realizar el análisis de tecnologías y análisis y diseño del sistema en base a esas condiciones y teniendo en cuenta las necesidades que se podrán ver posteriormente en la sección de requisitos del sistema. 
+La limitación a la hora de realizar el proyecto es que al tener ya una aplicación desarrollada con ciertas tecnologías y modelos de datos, se debe realizar el análisis y diseño del sistema en base a esas condiciones y teniendo en cuenta las necesidades concretas de la empresa, que se podrán ver posteriormente en la sección de requisitos del sistema.
 
 
 \section{Herramientas de trabajo}
 
-% TODO: Explicar las tecnoloías que estoy utilizando para cada una de las partes, y las librerías utilizadas.
+% Explicar frameworks, tecnologías, entornos de desarrollo, editores de código fuente, git, tortoisegit, github, google met y chat/gmail para comunicación con empresa en remoto
 
-TODO: ¿Explicar frameworks, tecnologías, entornos de desarrollo, editores de código fuente, git, tortoisegit, github, google met y chat/gmail para comunicación con empresa en remoto?
+Para desarrollar el proyecto descrito anteriormente es necesario trabajar con las herramientas que ya utiliza la empresa e introducir nuevas.\\
+
+El backend se desarrolla con el lenguaje de programación \textit{C\#} utilizando \textit{.NET Framework 4.8} ya que la aplicación de la empresa está implementada de esta forma. Además, como entorno de desarrollo se utilza \textit{Microsof Visual Studio}.\\
+
+El frontend se desarrolla con \textit{React} y utilizando los lenguajes de programación \textit{JavaScript}, \textit{HTML} y \textit{CSS} y teniendo \textit{Visual Studio Code} como editor de código fuente.\\
+
+Como software de control de versiones se utiliza \textit{Git}. Para alojar el código del frontend se utiliza \textit{GitHub}. Para alojar el código del backend se utiliza un repositorio de la empresa. Y para clonar el repositorio donde se aloja la aplicación Helpnex se utiliza el cliente \textit{TotoiseGit}.\\
+
+Por otro lado, este proyecto se está desarrollando de tal forma que la estudiante trabaja para la empresa de forma remota, estando la sede de la empresa en Zaragoza, España y la estudiante en Kaunas, Lituania. Por esta razón se tienen también en cuenta que las herramientas de trabajo utilizadas para mantener la comunicación con la empresa son \textit{Gmail}, \textit{Google Chat} y te \textit{Google Meet} para realizar las reuniones con el tutor en la empresa.
 
 \section{Esquema general de la memoria del proyecto}
 
