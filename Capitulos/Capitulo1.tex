@@ -41,8 +41,18 @@ El objetivo del proyecto es desarrollar un sistema de información en forma de a
 
 Estas alertas pueden ser de dos tipos:
 \begin{itemize}
-    \item \textbf{Presencias}: son alertas que indican la presencia de un trabajador en una habitación. Estas presencias se muestran en los terminales y pueden ser no identificadas (se pulsa un botón en la pantalla táctil del terminal) o identificadas (el trabajador pasa su tarjeta de identicación por el lector del terminal).
-    \item \textbf{Alarmas}: son alertas que se disparan una única vez. Estas son generadas desde los terminales que se encuentran en las habitaciones y pueden ser codificadas por el primer trabajador que se ha identificado en ese terminal.    
+    \item \textbf{Presencias}: son alertas que indican la presencia de un trabajador en una habitación. Estas presencias se muestran en los terminales y pueden ser de dos tipos:
+    \begin{enumerate}
+        \item Identificadas: un trabajador pasa su tarjeta de identicación por el lector del terminal.
+        \item No identificadas: mediante la pulsación de un botón en la pantalla táctil del terminal.
+    \end{enumerate}
+    \item \textbf{Alarmas}: son alertas generadas por los pacientes cuando hay una situación de emergencia desde los terminales que se encuentran en las habitaciones. Pueden ser codificadas por el primer trabajador que se ha identificado en ese terminal.
+    El ciclo de vida de estas alarmas pasa por tres estados:
+    \begin{enumerate}
+        \item Disparada: la alarma ha sido generada y queda pendiente de ser aceptada.
+        \item Aceptada: un trabajador es consciente de la existencia de esa alarma mediante su identificación en el terminal y queda pendiente de ser atendida.
+        \item Atendida: la alarma queda pendiente de ser codificada por el trabajador que la ha aceptado.
+    \end{enumerate}    
 \end{itemize}
 
 % Hetereogeneidad de tamaños
