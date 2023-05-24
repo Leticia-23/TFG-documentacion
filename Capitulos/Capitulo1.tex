@@ -36,6 +36,7 @@ En este contexto la parte del trabajo a realizar (que se explica con más detall
 
 
 \section{Objetivos y limitaciones}
+\label{section-objetivos}
 
 El objetivo del proyecto es desarrollar un sistema de información en forma de aplicación web que muestra la monitorización en tiempo real de alertas. \\
 
@@ -46,12 +47,13 @@ Estas alertas pueden ser de dos tipos:
         \item Identificadas: un trabajador pasa su tarjeta de identicación por el lector del terminal.
         \item No identificadas: mediante la pulsación de un botón en la pantalla táctil del terminal.
     \end{enumerate}
-    \item \textbf{Alarmas}: son alertas generadas por los pacientes cuando hay una situación de emergencia desde los terminales que se encuentran en las habitaciones. Pueden ser codificadas por el primer trabajador que se ha identificado en ese terminal.
+    \item \textbf{Alarmas}: son alertas generadas por los pacientes cuando hay una situación de
+    emergencia desde los terminales que se encuentran en las habitaciones. Requieren que un miembro del personal sanitario vaya a la habitación para solucionar la emergencia.
     El ciclo de vida de estas alarmas pasa por tres estados:
     \begin{enumerate}
         \item Disparada: la alarma ha sido generada y queda pendiente de ser aceptada.
-        \item Aceptada: un trabajador es consciente de la existencia de esa alarma mediante su identificación en el terminal y queda pendiente de ser atendida.
-        \item Atendida: la alarma queda pendiente de ser codificada por el trabajador que la ha aceptado.
+        \item Aceptada: un trabajador indica al sistema que es consciente de la existencia de esa alarma y que va a hacerse cargo de ella.
+        \item Atendida: un trabajador ha acudido a la habitación y va a realizar la acción necesaria para solucionar la emergencia. El trabajador puede identificarse introduciendo un PIN personal, pasando una tarjeta identificativa por el terminal o bien puede realizar una presencia anónima pulsando el botón apropiado en el terminal. Tras atender la emergencia la alarma queda pendiente de ser codificada por dicho trabajador.
     \end{enumerate}    
 \end{itemize}
 
