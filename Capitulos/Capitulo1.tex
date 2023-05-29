@@ -7,9 +7,7 @@ En este capítulo se presenta el contexto del trabajo, así como la motivación 
 
 % Explicar en qué trabaja la empresa, cómo trabaja, etc.
 
- Ibernex \cite{ibernex} es una empresa zaragonana especializada en el diseño, desarrollo e integración de soluciones y servicios tecnológicos destinados al sector sanitario y socio-sanitario. Estas soluciones se centran en automatizar y digitalizar la atención y experiencia de residencias u hospitales.\\
-
- Además, Ibernex cuenta con un largo recorrido de la mano del grupo Pikolín y recientemente se han incorporado dos nuevos accionistas mayoritarios con la intención de potenciar su presencia en el mercado internacional. Actualmente, la empresa es líder en el sector en Iberia (España y Portugal) donde su principal core de negocio son los centros sociosanitaios, pero también alcanzó el 30\% de facturación en el mercado internacional durante el 2022, más concretamente en Latinoamérica potenciando la digitalización de los hospitales y ciudades de la salud. \\
+ Ibernex \cite{ibernex} es una empresa zaragonana especializada en el diseño, desarrollo e integración de soluciones y servicios tecnológicos destinados al sector sanitario y socio-sanitario. Estas soluciones se centran en automatizar y digitalizar la atención y experiencia de residencias u hospitales. La empresa cuenta con un largo recorrido de la mano del grupo Pikolín y recientemente se han incorporado dos nuevos accionistas mayoritarios con la intención de potenciar su presencia en el mercado internacional. Actualmente, Ibernex es líder en el sector en Iberia (España y Portugal) donde su principal core de negocio son los centros sociosanitaios, pero también alcanzó el 30\% de facturación en el mercado internacional durante el 2022, más concretamente en Latinoamérica potenciando la digitalización de los hospitales y ciudades de la salud. \\
 
  Los clientes de la empresa, como se ha comentado anteriormente, son residencias u hospitales que quieren digitalizar el proceso de cuidado y atención de pacientes, además de otros procesos que puedan tener según sus necesidades. \\
 
@@ -28,26 +26,21 @@ La compañía realiza todo el proceso de construcción del producto. \\
 
 % Explicar el contexto de este TFG para la empresa
 
-Los clientes que tiene la compañía actualmente trabajan mayormente con aplicaciones de escritorio. Pero Ibernex considera que sería una buena opción que en residencias u hospitales se pueda monitorizar alarmas mediante la visualización de estas en pantallas.\\
+Los clientes que tiene la compañía actualmente trabajan mayormente con aplicaciones de escritorio. Pero Ibernex considera que sería una buena opción que en residencias u hospitales se pueda monitorizar alarmas mediante la visualización de estas en pantallas. Para esto han considerado que una buena solución sería tener una aplicación web en la que se pueda visualizar en tiempo real las alertas de la institución.\\
 
-Para esto han considerado que una buena solución sería tener una aplicación web en la que se pueda visualizar en tiempo real las alertas de la institución.\\
-
-En este contexto la parte del trabajo a realizar (que se explica con más detalle en la siguiente sección) es realizar modificaciones en la implementación de Helpnex y realizar el frontal, que será el que reciba las alertas en tiempo real, separado de la aplicación actual. 
+En este contexto la parte del trabajo a realizar (que se explica con más detalle en la siguiente sección) es hacer modificaciones en la implementación de Helpnex e implementar el frontal web, que será el que reciba las alertas en tiempo real, separado de la aplicación actual.
 
 
 \section{Objetivos y limitaciones}
 \label{section-objetivos}
-
-El objetivo del proyecto es desarrollar un sistema de información en forma de aplicación web que muestra la monitorización en tiempo real de alertas. \\
-
 % Explicar concretamente el trabajo a realizar - objetivo más detallado
-El trabajo a realizar para llevar a cabo la construcción de la aplicación web consta de dos partes. En primer lugar, implementar un frontend completo desde cero separado de la aplicación actual de Ibernex, que recibirá las alertas en tiempo real y permitirá visualizar cierta información de estas alertas. En segundo lugar, el desarrollo de un backend que se realiza integrando código en Helpnex aprovechando algunas de las funcionalidades existentes y desarrollando las nuevas funcionalidades necesarias. \\
+El objetivo del proyecto es desarrollar un sistema de información en forma de aplicación web que muestra la monitorización en tiempo real de alertas. El trabajo a realizar para llevar a cabo la construcción de la aplicación web consta de dos partes. En primer lugar, implementar un frontend completo desde cero separado de la aplicación actual de Ibernex, que recibirá las alertas en tiempo real y permitirá visualizar cierta información de estas alertas. En segundo lugar, el desarrollo de un backend que se realiza integrando código en Helpnex aprovechando algunas de las funcionalidades existentes y desarrollando las nuevas funcionalidades necesarias. \\
 
 Estas alertas pueden ser de dos tipos:
 \begin{itemize}
     \item \textbf{Presencias}: son alertas que indican la presencia de un trabajador en una habitación. Estas presencias se muestran en los terminales y pueden ser de dos tipos:
     \begin{enumerate}
-        \item Identificadas: un trabajador pasa su tarjeta de identicación por el lector del terminal.
+        \item Identificadas: un trabajador pasa su tarjeta de identicación por el lector del terminal o intruduce su PIN personal en el terminal.
         \item No identificadas: mediante la pulsación de un botón en la pantalla táctil del terminal.
     \end{enumerate}
     \item \textbf{Alarmas}: son alertas generadas por los pacientes cuando hay una situación de
@@ -67,47 +60,43 @@ Se tendrá en cuenta también que el inicio de sesión en la aplicación web se 
 Este sistema web servirá para pequeños y grandes escenarios. Es decir, será útil para una residencia pequeña en la que el número de clientes, habitaciones y por tanto terminales sea reducido. O el caso contrario en el que se quiera monitorizar las alertas de un hospital de gran tamaño con un alto número de clientes y terminales.\\
 
 
-La limitación a la hora de realizar el proyecto es que al tener ya una aplicación desarrollada con ciertas tecnologías y modelos de datos, se debe realizar el análisis y diseño del sistema en base a esas condiciones y teniendo en cuenta las necesidades concretas de la empresa, que se podrán ver posteriormente en la sección de requisitos del sistema.
+La limitación a la hora de realizar el proyecto es que, al tener ya una aplicación desarrollada con ciertas tecnologías y modelos de datos, se debe realizar el análisis y diseño del sistema en base a esas condiciones y teniendo en cuenta las necesidades concretas de la empresa, que se podrán ver posteriormente en la sección de requisitos del sistema.
 
 
 \section{Herramientas de trabajo}
 
 % Explicar frameworks, tecnologías, entornos de desarrollo, editores de código fuente, git, tortoisegit, github, google met y chat/gmail para comunicación con empresa en remoto
 
-Para desarrollar el proyecto descrito anteriormente es necesario trabajar con las herramientas que ya utiliza la empresa e introducir nuevas.\\
+Para desarrollar el proyecto descrito anteriormente es necesario trabajar con las herramientas que ya utiliza la empresa e introducir nuevas.
 
-El backend se desarrolla con el lenguaje de programación \textit{C\#} utilizando \textit{.NET Framework 4.8} \cite{net-framework} ya que la aplicación de la empresa está implementada de esta forma. Además, como entorno de desarrollo se utilza \textit{Microsof Visual Studio} \cite{vs}.\\
+\begin{itemize}
+    \item El backend se desarrolla con el lenguaje de programación \textit{C\#} utilizando \textit{.NET Framework 4.8} \cite{net-framework} ya que la aplicación de la empresa está implementada de esta forma. Además, como entorno de desarrollo se utilza \textit{Microsof Visual Studio} \cite{vs}.
+    \item El frontend se desarrolla con \textit{React} \cite{react} y utilizando los lenguajes de programación \textit{JavaScript}, \textit{HTML} y \textit{CSS} y teniendo \textit{Visual Studio Code} \cite{vscode} como editor de código fuente.
+    \item Como software de control de versiones se utiliza \textit{Git}. Para alojar el código del frontend se utiliza \textit{GitHub}. Para alojar el código del backend se utiliza un repositorio de la empresa. Y para clonar el repositorio donde se aloja la aplicación Helpnex se utiliza el cliente \textit{TotoiseGit} \cite{tortoise-git}.
+\end{itemize}
 
-El frontend se desarrolla con \textit{React} \cite{react} y utilizando los lenguajes de programación \textit{JavaScript}, \textit{HTML} y \textit{CSS} y teniendo \textit{Visual Studio Code} \cite{vscode} como editor de código fuente.\\
-
-Como software de control de versiones se utiliza \textit{Git}. Para alojar el código del frontend se utiliza \textit{GitHub}. Para alojar el código del backend se utiliza un repositorio de la empresa. Y para clonar el repositorio donde se aloja la aplicación Helpnex se utiliza el cliente \textit{TotoiseGit} \cite{tortoise-git}.\\
-
-Por otro lado, este proyecto se está desarrollando de tal forma que la estudiante trabaja para la empresa de forma remota, estando la sede de la empresa en Zaragoza, España y la estudiante en Kaunas, Lituania. Por esta razón se tienen también en cuenta que las herramientas de trabajo utilizadas para mantener la comunicación con la empresa son \textit{Gmail}, \textit{Google Chat} y te \textit{Google Meet} para realizar las reuniones con el tutor en la empresa.
+Por otro lado, este proyecto se está desarrollando de tal forma que la estudiante trabaja para la empresa de forma remota, estando la sede de la empresa en Zaragoza, España y la estudiante en Kaunas, Lituania. Por esta razón, cobran mayor relevancia las herramientas de trabajo utilizadas para mantener la comunicación con la empresa son \textit{Gmail}, \textit{Google Chat} y te \textit{Google Meet} para realizar las reuniones con el tutor en la empresa.
 
 \section{Esquema general de la memoria del proyecto}
 
 % Exponer las secciones que pertenecen a la memoria del proyecto para hacer una presentación de lo que se explica en cada una de ellas y no solo con el índice y los títulos.
 
-La estructura seguida en este documento es la siguiente:\\
+La estructura seguida en este documento es la siguiente:
 
-Previamente a esta sección se encuentran los agradecimentos y un resumen completo del proyecto realizado. A continuación el índice que resume esta sección.\\
+\begin{itemize}
+    \item Previamente a esta sección se encuentran los agradecimentos y un resumen completo del proyecto realizado. A continuación el índice que resume esta sección.
+    \item En este mismo capítulo se encuentran tres secciones distintas, además de esta misma. La primera, es el contexto del trabajo donde se explica qué empresa es Ibernex, cómo trabaja y quiénes son sus clientes, además de exponer cómo son sus soluciones y cómo encaja este proyecto en la empresa. La segunda, son los objetivos y limitaciones con los cuales se expone detalladamente qué es lo que se va a realizar y qué es lo que se va a conseguir al final y con qué limitaciones. Y por último, se exponen las herramientas de trabajo utilizadas durante el desarrollo del proyecto.
+    \item En el segundo capítulo se detalla el análisis y diseño de la aplicación web. En la primera sección se encuentran los requisitos funcionales del sistema acordados con la empresa. En la segunda, se explica la arquitectura software del sistema con ayuda de un diagrama. En la tercera, se expone la información relevante a los modelos y base de datos que utiliza la empresa utilizados en el contexto de este proyecto. Y por último se puede observar la interfaz de usuario de la aplicación web.
+    \item En el tercer capítulo se pueden encontrar dos secciones en las que se proporciona de manera más detallada diversos aspectos de la implementación realizada para el frontend y backend respectivamente.
+    \item En el cuarto capítulo se explica cómo se ha gestionado el proyecto, comentando la planificación inicial y final junto con un análisis explicativo de los posibles cambios.
+    \item En el quinto capítulo se exponen las conclusiones del proyecto y se explica qué conocimientos se han adquirido, técnicamente y personalmente. Además, se proporciona información acerca de una continuación del trabajo en el futuro.
+    \item Por último se puede encontrar detallada la bibliografía, la lista de figuras y la lista de tablas.
+\end{itemize}
 
-En este mismo capítulo se encuentran tres secciones distintas, además de esta misma. La primera, es el contexto del trabajo donde se explica qué empresa es Ibernex, cómo trabaja y quiénes son sus clientes, además de exponer cómo son sus soluciones y cómo encaja este proyecto en la empresa. La segunda, son los objetivos y limitaciones con los cuales se expone detalladamente qué es lo que se va a realizar y qué es lo que se va a conseguir al final y con qué limitaciones. Y por último, se exponen las herramientas de trabajo utilizadas durante el desarrollo del proyecto.\\
+Adicionalmente, se incluyen los siguientes anexos que proporcionan mayor detalle, aclaraciones o explicaciones complementarias a los contenidos de los mencionados capítulos:
 
-En el segundo capítulo se detalla el análisis y diseño de la aplicación web. En la primera sección se encuentran los requisitos funcionales del sistema acordados con la empresa. En la segunda, se explica la arquitectura software del sistema con ayuda de un diagrama. En la tercera, se expone la información relevante a los modelos y base de datos que utiliza la empresa utilizados en el contexto de este proyecto. Y por último se puede observar la interfaz de usuario de la aplicación web. \\
-
-En el tercer capítulo se pueden encontrar dos secciones en las que se proporciona de manera más detallada diversos aspectos de la implementación realizada para el frontend y backend respectivamente.\\
-
-En el cuarto capítulo se explica cómo se ha gestionado el proyecto, comentando la planificación inicial y final junto con un análisis explicativo de los posibles cambios.\\
-
-En el quinto capítulo se exponen las conclusiones del proyecto y se explica qué conocimientos se han adquirido, técnicamente y personalmente. Además, se proporciona información acerca de una continuación del trabajo en el futuro.\\
-
-Por último se puede encontrar detallada la bibliografía, la lista de figuras, la lista de tablas y los distintos anexos con explicaciones más detalladas de diferentes aspectos, que se han citado a lo largo del documento.
-
-
-
-
-
-
-
-
+\begin{itemize}
+    \item Anexo A. Alternativas arquitecturas
+    \item Anexo B. Decisión descarte SignalR
+    \item Anexo C. Decisión descarte JWT
+\end{itemize}
