@@ -24,20 +24,46 @@ TODO: Decisiones de implementación que tengo anotadas y problemas u opciones su
 El backend de la aplicación se realiza con \textit{.NET Framework 4.8} ya que como se ha explicado en secciones anteriores la implementación es añadir funcionalidad a la aplicación existente. \newline
 
 Para la comunicación con el frontend mediante WebSockets se utiliza la librería \textit{websocket-sharp} \cite{websocket-sharp} en su versión \textit{1.0.3.0}.
-Se decide utilizar esta librería ya que en otra de las funcionalidades de la aplicación existente se utiliza aunque en una versión anterior, y se cree conveniente utilizar algo similar de cara a que internamente en la empresa puedan entender mejor la implementación o reutilizar el código.
+Se decide utilizar esta librería ya que en otra de las funcionalidades de la aplicación existente se utiliza (aunque en una versión anterior), y se cree conveniente utilizar algo similar de cara a que internamente en la empresa puedan entender mejor la implementación o reutilizar el código.
 La instalación de esto se realiza mediante el propio Visual Studio, que se ha comentado la sección de herramientras de trabajo que es el entorno de desarrollo utilizado para implementar el backend, utilizando la opción de administrar paquetes NuGet e instalando el nombrado. \newline 
 
 En un primer lugar se propone realizar la comunicación del backend con el frontend utilizando \textit{SignalR} \cite{signalr} pero finalmente se descarta por incompatibilidad con la aplicación actual y simplicidad en la arquitectura software. Se puede ver más información referente a esta decisión en el \hyperref[anexo-b]{Anexo B}. \newline
 
-% Mirar en mis notas todas las decisiones y controversisas con backend
-TODO: Decisiones de implementación respecto a ficheros y funciones que tengo anotadas y problemas u opciones surgidas respecto a la implementación del backend
 
-% TODO: explicar aquí todo el tema de que se divide en SERVICIOS de Helpnex etc y lo que hago yo
+% Mirar en mis notas todas las decisiones y controversisas con backend
+TODO: Decisiones de implementación respecto a ficheros y funciones que tengo anotadas y problemas u opciones surgidas respecto a la implementación del backend\\
+
+% TODO: Explicar todo el tema de que se divide en SERVICIOS de Helpnex etc y lo que hago yo
 
 % Explicar qué tipos de eventos llegan al servicio y poner diagramas de comportamiento para mostrar algún ejemplo de comportamiento de cómo llegan los servicios con el comportamiento del terminal.
 
-% TODO: Explicar las librerías utilizadas.
+De los servicios y eventos nombrados en la arquitectura detallada del PAServidor en la \hyperref[section-arquitectura]{sección 2.2}, el servicio que se ha implementado para añadir funcionalidad a la aplicación existente y que sirve como backend de la aplicación web, es el \textit{Servicio de monitorización web} que se puede observar en la sección nombrada, concretamente en la \hyperref[fig:PAServidor]{\textit{Figura 2.2}}.\\
 
-% \section{Problemas encontrados}
+Respecto al comportamiento de los servicios y eventos implocados, a continuación se exponen unos ejemplos de funcionamiento.\\
 
-% No sé si poner esta sección o explicar los problemas en las decisiones tomadas
+El funcionamiento para el caso de las alarmas es el siguiente:
+\begin{enumerate}
+	\item El paciente pulsa el botón del terminal para solicitar ayuda.	
+	\item El terminal notifica al Servicio de Comunicación con Terminales, mediante el socket, que alguien ha pulsado el botón.
+	\item El servicio comunicación con terminales envía un evento \textit{NuevaAlarma} con toda la información relativa al terminal.
+	\item El servicio de alarmas, que está suscrito al evento \textit{NuevaAlarma}, recibe el evento y lo procesa. Es necesario acceder a la base de datos para obtener información necesaria. Como resultado envía un evento \textit{NotificarAlarmaEnMonitorWeb}.
+	\item El servicio de monitorización web recibe el evento \textit{NotificarAlarmaEnMonitorWeb} al que está suscrito y lo procesa, envíando mediante websocket la información conveniente a la aplicación web.
+	\item En la aplicación web aparecerá la nueva alarma.
+	\item El Servicio de Monitorización web recibe el evento \textit{SAEvento\_NuevaAccionPendiente} cuando se producen alarmas y lo procesa si le ha llegado el evento \textit{NotificarAlarmaEnMonitorWeb} para actualizar la alarma indicada, y el resultado de la actualización es envíado mediante el websocket a la aplicación web.
+	\item En la aplicación web aparecerá la alarma actualizada.
+	\item El Servicio de Monitorización web recibe el evento \textit{SAEvento\_DisparoAvisoFinalizado} cuando se codifica una alarma y lo procesa si le ha llegado el evento de \textit{NotificarAlarmaEnMonitorWeb} para eliminar la alarma indicada, y el resultado de la actualización es envíado mediante el websocket a la aplicación web.
+	\item En la aplicación web desaparecerá la alarma actualizada.
+\end{enumerate}
+
+El funcionamiento para el caso de las presencias es el siguiente:
+
+\begin{enumerate}
+	\item Un trabajador se identifica en la habitación pasando su tarjeta personal por el lector o con el su PIN.
+	\item El terminal notifica al Servicio de Comunicación con Terminales, mediante el socket, que alguien está presente.
+	\item El Servicio de Comunicación con Terminales envía un evento \textit{NuevaPresencia} con toda la información relativa a la presencia.
+	\item El servicio de alarmas que está suscrito al evento \textit{NuevaPresencia} recibe el evento y lo procesa. Es necesario acceder a la Base de Datos para obtener información necesaria. Como resultado envía un evento \textit{PAEvento\_NotificarEstadoPresencias}.
+	\item El servicio de monitorización web recibe el evento \textit{PAEvento\_NotificarEstadoPresencias} que puede ser de las presencias actuales, de una presencia nueva, actualizada o eliminada y lo procesa. Como resultado envía la información necesaria mediante el websocket a la aplicación web.
+	\item En la aplicación web aparece, se actualiza o desaparece la presencia.
+\end{enumerate}
+
+

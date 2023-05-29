@@ -90,29 +90,44 @@ Los requisitos no funcionales definen los atributos de calidad del sistema descr
 \label{section-arquitectura}
 % Explicar la arquitectura final del sistema
 
+El despliegue del sistema se realizará en una red de área local (LAN) ya que tiene que servir para una residencia u hospital en el que se instalará el sistema configurando la base de datos correspondiente a la información de la institución.\\
 
-Para ver las relaciones entre el software y su entorno (dónde se despliega y ejecuta) se utiliza una vista de distribución estilo despliegue. Se puede ver en la \textit{Figura 2.1}. \newline
+Para ver las relaciones entre el software y su entorno se utiliza una vista de distribución estilo despliegue. Se puede ver en la \textit{Figura 2.1}. \\
 
 \begin{figure}[!h]
     \centering
-    \includegraphics[width=0.8\textwidth,height=6cm]{Imagenes/Arquitectura_Sistema}
+    \includegraphics[width=1\textwidth,height=10cm]{Imagenes/Arquitectura-despliegue}
     \caption{Diagrama de despliegue}
     \label{fig:despliegue}
 \end{figure}
 
-La arquitectura completa respecto a lo que ha estado relacionado con el proyecto es la que se ve en la figura. No obstante lo que se ha implementado ha sido completamente la aplicación web y por otro lado se ha modificado y añadido funcionalidad a la Plataforma Asistencial Servidor de la aplicación de Ibernex. \newline
+Con este diagrama se observan los elementos que han estado implicados en el proyecto. No obstante, lo que se ha implementado ha sido: la aplicación web completa y la funcionalidad añadida a la Plataforma Asistencial Servidor de la aplicación de Ibernex. A continuación se describen los elementos con mayor detalle:
 
-El ámbito del despliegue del sistema será en una red de área local (LAN) ya que serviría para una residencia u hospital en el que se instalaría el sistema configurando la base de datos correspondiente a la información de los pacientes del centro. \newline
+\begin{itemize}
+	\item \textbf{Plataforma Asistencial Servidor (PAServidor)} es la aplicación servidor del sistema asistencial Helpnex. Se trata de una aplicación monolítica modular. Dos de los elementos que componen la arquitectura de la aplicación son:
+	\begin{itemize}
+		\item Servicios: contienen la lógica del sistema Helpnex. Los servicios se cargan al inicio de la aplicación en función de la licencia adquirida. Cada servicio es el encargado de realizar una tarea específica. Algunos ejemplos de tareas son: comunicación con los terminales de habitación; gestionar las alarmas del sistema; comunicación con la aplicación web de monitorización; localización en interiores; comunicaciones SIP; entre otras.
+		\item Cola de eventos: es el mecanismo de comunicación que utilizan los servicios para transmitir información entre ellos. Cada servicio se suscribe a una serie de eventos.
+	\end{itemize}
+	\item La \textbf{base de datos} es la que permite realizar la persistencia de datos de PAServidor, PACliente, la institución, los pacientes y resto de datos necesarios.
+	\item La \textbf{aplicación web} que recibe los datos necesarios a monitorizar para mostrarlos.
+	\item \textbf{Plataforma Asistencial Cliente (PACliente)} se comunica con el PAServidor mediante una conexión socket TCP y es la encargada de gestionar la información del sistema Helpnex y guardarla en la Base de Datos. Esta información se utiliza por PAServidor para realizar las gestiones necesarias. De igual forma, se compone de módulos que se gestionan mediante una licencia y permiten gestionar distintos elementos. Uno de los módulos sirve para configurar un sistema de reglas de notificación ante una alarma y esto es lo que permite al sistema generar las reglas y notificar por puestos la información que debe ser mostrada en la aplicación web.\\
+	PACliente se ha utilizado en el proyecto  para realizar la gestión de plantas, habitaciones, residentes, terminales, trabajadadores, recursos de los puestos y configuración de reglas teniendo una institución ficticia generada con datos de prueba durante todo el desarrollo.
+	\item El \textbf{terminal} es el hardware que se encuentra en la habitación. En este contexto sirve tanto para notificar y codificar las alarmas como para registrar las presencias de trabajadores en las habitaciones.
+\end{itemize}
 
+Para entender mejor la arquitectura del PAServidor se proporciona un diagrama más detallado en la \textit{Figura 2.2}.
 
-TODO: Terminar de explicar la arquitectura final del sistema consultando con Carlos para hacerlo correctamente respecto a la parte de Ibernex\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth,height=17cm]{Imagenes/Arquitectura-PAServidor}
+    \caption{Diagrama arquitectura PAServidor}
+    \label{fig:PAServidor}
+\end{figure}
 
-% Explicar que yo mayormente trabajo con PAServidor y qé es, que PACliente no lo toco para nada pero está dentro de la app y para qué lo utilizo.
-
-% Añadir los terminales en el diagrama conectándolo con la aplicación de Ibernex.
 
 % Hacer referencia al Anexo donde se expliquen las alternativas que se plantearon
-La arquitectura aquí expuesta es la elegida entre las distintas opciones barajadas que se pueden ver con detalle en el \hyperref[anexo-a]{Anexo A}.
+La arquitectura aquí expuesta es la elegida entre las distintas opciones barajadas. Estas otras se pueden consultar con detalle en el \hyperref[anexo-a]{Anexo A}.
 
 
 \section{Base de datos}
