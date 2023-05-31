@@ -36,15 +36,17 @@ Seguidamente (véase tabla \ref{tab:RF}) se presentan, en modo de tabla, los pri
 	\hline
 	RF-10	&	El sistema permitirá al usuario elegir una planta y ver la información de las alertas correspondiente a esa planta. \\
 	\hline
-	RF-11	&	El sistema mostrará al usuario un carrusel (presentación de tarjetas que se pueden recorrer de izquierda a derecha) con las alertas de la planta seleccionada. Las alertas más actuales aparecerán en las primeras posiciones (izquierda). \\
+	RF-11	&	El sistema mostrará al usuario un carrusel (presentación de tarjetas que se pueden recorrer de izquierda a derecha) con las alertas de la planta seleccionada. \\
 	\hline
-	RF-12	&	El sistema mostrará al usuario la información del paciente de las alarmas activas y el lugar y momento en el que se han disparado. \\
+	RF-12	&	El usuario podrá ver las alertas más actuales en las primeras posiciones (izquierda) del carrusel. \\
 	\hline
-	RF-13	&	El sistema mostrará al usuario la información del trabajador de las presencias activas identificadas y el lugar y momento en el que se han producido. \\
+	RF-13	&	El sistema mostrará al usuario la información del paciente de las alarmas activas y el lugar y momento en el que se han disparado. \\
 	\hline
-	RF-14	&	El sistema mostrará al usuario el plano (imagen guardada en la base de datos) de la planta seleccionada.  \\
+	RF-14	&	El sistema mostrará al usuario la información del trabajador de las presencias activas identificadas y el lugar y momento en el que se han producido. \\
 	\hline
-	RF-15	&	El sistema destacará al usuario en el plano las alertas activas en cada habitación coloreando la habitación según el tipo de alerta, y en caso de ser alarma también su estado, siguiendo la siguiente prioridad:
+	RF-15	&	El sistema mostrará al usuario el plano (imagen guardada en la base de datos) de la planta seleccionada.  \\
+	\hline
+	RF-16	&	El sistema destacará al usuario en el plano las alertas activas en cada habitación coloreando la habitación según el tipo de alerta, y en caso de ser alarma también según su estado, siguiendo la siguiente prioridad:
 	\begin{enumerate}
 		\item Rojo: alerta de tipo alarma y estado disparada
 		\item Amarillo: alerta de tipo alarma y estado aceptada
@@ -52,9 +54,13 @@ Seguidamente (véase tabla \ref{tab:RF}) se presentan, en modo de tabla, los pri
 		\item Verde: alerta de tipo presencia
 	\end{enumerate}\\
 	\hline
-	RF-16	&	El sistema mostrará al usuario el listado de alarmas pendientes, sin filtrado por planta, indicando el tipo de alarma. \\
+	RF-18	&	El sistema mostrará al usuario un icono en la habitación según la prioridad. \\
 	\hline
-	RF-17	&	El sistema mostrará al usuario el número total de alarmas y presencias. \\
+	RF-19	&	El sistema permitirá clicar en los iconos para ver una tarjeta emergente con la información concreta de la alerta con mayor prioridad de las que se encuentran en el carrusel. \\
+	\hline
+	RF-20	&	El sistema mostrará al usuario el listado de alarmas pendientes con su información, sin filtrado por planta, e indicando además el tipo de alarma. \\
+	\hline
+	RF-21	&	El sistema mostrará al usuario el número total de alarmas y presencias de la institución. \\
 	\hline
 \caption{Requisitos funcionales del sistema}
 \label{tab:RF}
@@ -86,13 +92,14 @@ Los requisitos no funcionales definen los atributos de calidad del sistema descr
 \label{tab:RNF}
 \end{longtable}
 
+
 \section{Arquitectura software del sistema}
 \label{section-arquitectura}
 % Explicar la arquitectura final del sistema
 
-El despliegue del sistema se realizará en una red de área local (LAN) ya que tiene que servir para una residencia u hospital en el que se instalará el sistema configurando la base de datos correspondiente a la información de la institución.\\
+El despliegue del sistema se realizará en una red de área local (LAN) ya que tiene que servir para una institución sanitaria o socio-sanitaria en la que se instalará el sistema configurando la base de datos correspondiente a la información de dicha institución.\\
 
-Para ver las relaciones entre el software y su entorno se utiliza una vista de distribución estilo despliegue. Se puede ver en la \textit{Figura 2.1}. \\
+Para ver las relaciones entre el software y su entorno se utiliza una vista de distribución estilo despliegue. (Veáse la \textit{Figura 2.1}). \\
 
 \begin{figure}[!h]
     \centering
@@ -110,13 +117,17 @@ Con este diagrama se observan los elementos que han estado implicados en el proy
 		\item Cola de eventos: es el mecanismo de comunicación que utilizan los servicios para transmitir información entre ellos. Cada servicio se suscribe a una serie de eventos.
 	\end{itemize}
 	\item La \textbf{base de datos} es la que permite realizar la persistencia de datos de PAServidor, PACliente, la institución, los pacientes y resto de datos necesarios.
-	\item La \textbf{aplicación web} que recibe los datos necesarios a monitorizar para mostrarlos.
-	\item \textbf{Plataforma Asistencial Cliente (PACliente)} se comunica con el PAServidor mediante una conexión socket TCP y es la encargada de gestionar la información del sistema Helpnex y guardarla en la Base de Datos. Esta información se utiliza por PAServidor para realizar las gestiones necesarias. De igual forma, se compone de módulos que se gestionan mediante una licencia y permiten gestionar distintos elementos. Uno de los módulos sirve para configurar un sistema de reglas de notificación ante una alarma y esto es lo que permite al sistema generar las reglas y notificar por puestos la información que debe ser mostrada en la aplicación web.\\
-	PACliente se ha utilizado en el proyecto  para realizar la gestión de plantas, habitaciones, residentes, terminales, trabajadadores, recursos de los puestos y configuración de reglas teniendo una institución ficticia generada con datos de prueba durante todo el desarrollo.
-	\item El \textbf{terminal} es el hardware que se encuentra en la habitación. En este contexto sirve tanto para notificar y codificar las alarmas como para registrar las presencias de trabajadores en las habitaciones.
+	\item La \textbf{aplicación web} que recibe los datos necesarios a monitorizar desde el nuevo servicio añadido a PAServidor para mostrarlos.
+	\item \textbf{Plataforma Asistencial Cliente (PACliente)} es la encargada de gestionar la información del sistema Helpnex y guardarla en la Base de Datos. Se comunica con el PAServidor mediante una conexión socket TCP. La información se utiliza por PAServidor para realizar las gestiones necesarias. De igual forma, se compone de módulos que se gestionan mediante una licencia y permiten gestionar distintos elementos. Uno de los módulos sirve para configurar un sistema de reglas de notificación ante una alarma y esto es lo que permite al sistema generar las reglas y notificar por puestos la información que debe ser mostrada en la aplicación web.\\
+	PACliente se ha utilizado en el proyecto  para realizar la gestión de plantas, habitaciones, residentes, terminales, trabajadadores, recursos de los puestos y configuración de reglas, teniendo una institución ficticia generada con datos de prueba durante todo el desarrollo.
+	\item El \textbf{terminal} es el hardware que se encuentra en la habitación. En este contexto sirve tanto para notificar y codificar las alarmas como para registrar las presencias de trabajadores en las habitaciones. Existen otras tareas adicionales que pueden ser realizadas, pero que no están directamente relacionadas con el alcance de este proyecto.
 \end{itemize}
 
-Para entender mejor la arquitectura del PAServidor se proporciona un diagrama más detallado en la \textit{Figura 2.2}.
+% Hacer referencia al Anexo donde se expliquen las alternativas que se plantearon
+La arquitectura aquí expuesta es la elegida entre las distintas opciones barajadas. Estas otras se pueden consultar con detalle en el \hyperref[anexo-a]{Anexo A}.\\
+
+% Arquitectura del PAServidor
+Para entender mejor la arquitectura del PAServidor se proporciona un diagrama más detallado. (Veáse la \textit{Figura 2.2}).
 
 \begin{figure}[H]
     \centering
@@ -125,10 +136,7 @@ Para entender mejor la arquitectura del PAServidor se proporciona un diagrama m�
     \label{fig:PAServidor}
 \end{figure}
 
-
-% Hacer referencia al Anexo donde se expliquen las alternativas que se plantearon
-La arquitectura aquí expuesta es la elegida entre las distintas opciones barajadas. Estas otras se pueden consultar con detalle en el \hyperref[anexo-a]{Anexo A}.
-
+Se puede ver el comportamiento de esta arquitectura en el contexto de este proyecto en la \hyperref[subsection-comportamiento]{sección 3.2.1}.
 
 \section{Base de datos}
 
