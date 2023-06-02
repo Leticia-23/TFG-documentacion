@@ -1,6 +1,6 @@
 \chapter{Implementación}
 
-% TODO: Explicar concretamente lo que se está implementando tanto en backend como en frontend. 
+En este capítulo se exponen ciertas explicaciones relacionadas con el desarrollo del frontend (implementación de la aplicación web) y el backend (implementación del nuevo servicio en Helpnex).
 
 \section{Implementación del frontend}
 
@@ -9,7 +9,7 @@ El frontend de la aplicación web se realiza con React utilizando los lenguajes 
 Para la comunicación del frontend con el backend mediante WebSockets se utiliza la librería \textit{reconnecting-websocket} \cite{reconect-ws}. Se decide utilizar esta frente a otras porque reconecta automáticamente con el servicio si la conexión se cierra por alguna razón y es compatible con \textit{WebSocket Browser API} \cite{api-ws-front}. \\
 
 
-% TODO: explicar que se recibe directamente la información a mostrar, qué es lo que se trata o no (por ejemplo el ordenar por actual que se realiza en el frontend, el filtrado por plantas, el procesado para el mapeado por habitaciones y prioridad).
+% Explicar que se recibe directamente la información a mostrar, qué es lo que se trata o no (por ejemplo el ordenar por actual que se realiza en el frontend, el filtrado por plantas, el procesado para el mapeado por habitaciones y prioridad).
 La aplicación web es una aplicación visual, en la que no se puede realizar ninguna acción sobre las alertas. Se recibe por websockets toda la información necesaria a monitorizar que procesa el nuevo servicio implementado en PAServidor. Por esta razón, la mayoría de la implementación de esta parte del proyecto se centra en interfaz de usuario aunque también se realiza el tratado de la información que llega para tener los datos de la manera indicada. Cabe destacar que el filtrado por plantas de las alertas, la ordenación de las alertas por más actuales, el filtrado de alertas por prioridad y el mapeado por habitaciones, se realiza en esta parte del proyecto.\\
 
 
@@ -27,13 +27,38 @@ Para implementar la aplicación web se ha considerado útil contar con el apoyo 
 
 Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código. De esta forma, ha sido más fácil realizar una implementación clara durante el desarrollo. Además, de cara a que la empresa pueda reutilizar el código hace que sea más sencillo comprenderlo. Se puede ver la organización realizada  en tiempo de desarrollo con una vista de módulos en forma de diagrama de paquetes. (Véase \textit{Figura 3.1}).\\
 
-% TODO: Diagrama de paquetes UML para explicar la organización.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=15cm]{Imagenes/Diagrama-paquetes-frontend}
+    \caption{Diagrama de paquetes frontend}
+    \label{fig:paquetes-frontend}
+\end{figure}
 
+
+En el diagrama se pueden ver distintos paquetes que cumplen distintas funcionalidades. Se explican a continuación:
+
+\textbf{app web} contiene \textit{package.json} que es un archivo de metadatos que contiene información sobre el proyecto como las dependencias; \textbf{node\_modules} que contiene todos los paquetes y dependencias de npm que se especifican en el archivo anterior; y \textit{eslintrc.json} que es el archivo de configuración para ESLint y que se ha utilizado para tener un código limpio y libre de errores. Por otro lado, se tienen los paquetes:
+\begin{itemize}
+	\item \textbf{public} que contiene archivos estáticos para el navegador. \textit{assets} contiene imágenes para la aplicación; \textit{manifest.json} y \textit{index.html} que son archivos de configuración de la página web; y otros iconos como el utilizado como favicon.
+	\item \textbf{src} Contiene distintos modulos esenciales que son el punto de entrada de la aplicación, la navegación y la configuración de ciertos estilos de la aplicación. Además, se puede ver la organización escogida a la hora de implementar la aplicación con la explicación de la funcionalidad de los paquetes que contiene:
+	\begin{enumerate}
+		\item \textbf{api}: módulo relacionado con la conexión con el backend.
+		\item \textbf{environment} y \textbf{localstorageObject}: módulos que gestionan y proporcionan información del usuario en todo el contexto de la aplicación.
+		\item \textbf{models}: módulo que contiene los distintos modelos de datos utilizados en la aplicación web.
+		\item \textbf{views}: módulo que contiene las vistas principales de la aplicación y \textbf{components} que contiene distintos módulos utilizados por dichas vistas.
+		\item \textbf{helpers}: módulo que contiene un módulo que es utilizado por los módulos de views y que contiene funciones auxiliares.
+	\end{enumerate}
+\end{itemize}
+
+
+Otra de las decisiones tomadas en la implementación es utilizar en el login la validación del formulario de bootstrap. De esta forma, los datos no se envían a backend a no ser que todos los campos estén completados. Además, en backend se hace la validación correspondiente, y si hay algún problema se informa al usuario de dicho problema mediante una tarjeta emergente.\\
+
+Como se explicará en la siguiente sección, el frontend tiene la información de los clientes y trabajadores desde el inicio de sesión, y cuando le llega información de nuevas alertas debe completar cierta información con la que ya tiene. Por esta razón, para que sea rápido y eficiente, se decide que esta información estará en diccionarios para un fácil y rápido acceso al dato concreto a utilizar. 
 
 
 \section{Implementación del backend}
 
-El backend de la aplicación se realiza con \textit{.NET Framework 4.8}, ya que como se ha explicado en secciones anteriores la implementación es añadir funcionalidad a la aplicación existente. \\
+El backend de la aplicación se realiza con \textit{.NET Framework 4.8}, ya que como se ha explicado en secciones anteriores la implementación que se realiza es concretamente añadir funcionalidad a la aplicación existente. \\
 
 Para la comunicación con el frontend mediante WebSockets se utiliza la librería \textit{websocket-sharp} \cite{websocket-sharp} en su versión \textit{1.0.3.0}.
 Se decide utilizar esta librería ya que en otra de las funcionalidades existente en la aplicación se utiliza (aunque en una versión anterior), y se cree conveniente utilizar algo similar de cara a que internamente en la empresa puedan entender mejor la implementación o reutilizar el código.
@@ -44,6 +69,17 @@ Al principio la empresa propuso realizar la comunicación del backend con el fro
 
 % Explicar qué SERVICIO implemento dentro de la arquitectura
 De los servicios y eventos nombrados en la arquitectura detallada del PAServidor en la \hyperref[section-arquitectura]{sección 2.2}, el servicio que se ha implementado para añadir funcionalidad a la aplicación existente y que sirve como backend de la aplicación web, es el \textit{Servicio de monitorización web} que se puede observar en la sección nombrada, concretamente en la \hyperref[fig:PAServidor]{\textit{Figura 2.2}}.\\
+
+%Explicar decisiones tomadas en la implementación del servicio
+Durante el desarrollo del servicio se han tomado algunas decisiones que se exponen a continuación.
+% - Carga de datos iniciales en vez de acceso siempre a base de datos
+Cuando un usuario inicia sesión en la aplicación web se envía una carga de datos iniciales con la información acerca de la configuración del centro (plantas con su información y sus planos), los clientes y los trabajadores. La decisión se toma valorando la cantidad de datos a enviar y el acceso a la base de datos. Se cree conveniente realizarlo de esta forma, sobre todo con los clientes y los trabajadores, para no realizar accesos a la base de datos cada vez que se tenga que enviar información actualizada de alertas, y sea la aplicación web la que complete dicha información. De esta manera el backend es más eficiente y los envíos de la información es más rápido pero el frontend tiene que hacer cierto procesado con la información que le llega para completarla.
+% - TODO: decisión diccionarios y uso
+
+
+% TODO: Diagrama de paquetes orfanización código
+
+
 
 % Explicar comportamiento de servicios y eventos
 \subsection{Comportamiento servicios y eventos}
@@ -77,5 +113,5 @@ El funcionamiento para el caso de las presencias es el siguiente:
 \end{enumerate}
 
 
-% TODO: Mirar en mis notas todas las decisiones y controversisas con backend
-TODO: Decisiones de implementación respecto a ficheros y funciones que tengo anotadas y problemas u opciones surgidas respecto a la implementación del backend\\
+
+

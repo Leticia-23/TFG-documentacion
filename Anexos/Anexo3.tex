@@ -1,12 +1,6 @@
 \chapter{Decisión descarte JWT}
 \label{anexo-c}
 
-% TODO: Explicar por qué finalmente no se ha utilizado JWT
-
-    % No hace falta para la empresa actualmente, no tiene sentido ya que va a estar en una LAN.
-
-    % Con el websocket y lo que necesita la empresa no se considera necesario
-
 Inicialmente la empresa propuso utilizar como método de autenticación JSON Web Tokens (JWT) \cite{jwt} para cuando se realizara el inicio de sesión almacenar en local storage el token.\\
 
 Esto se planteaba para el caso de que la arquitectura software fuese la que se planteaba inicialmente en la que se tenía un middleware ASP.NET Core como capa intermedia entre el backend, es decir la aplicación existente, y el frontend. Pero finalmente se decide junto con la empresa que la arquitectura no va a tener esa capa intermedia, ya que no la consideran necesaria. (Se puede ver más información sobre las distintas arquitecturas planteadas en el \hyperref[anexo-a]{Anexo A}). \\
