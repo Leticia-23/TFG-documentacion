@@ -144,7 +144,8 @@ Se puede ver el comportamiento de esta arquitectura en el contexto de este proye
 
 Para llevar a cabo el desarrollo, fue proporcionada por parte de la empresa una base de datos de prueba configurada siguiendo el modelo de datos existente de la aplicación de Ibernex.\\
 
-Parte de la información que se tiene que enviar a la web se puede obtener de los eventos que se reciben en el servicio, pero para obtener otros datos es necesario acceder a la base de datos. A continuación se exponen los diagramas de la base de datos utilizados en el contexto de este proyecto.
+Parte de la información que se tiene que enviar a la web se puede obtener de los eventos que se reciben en el servicio, pero para obtener otros datos es necesario acceder a la base de datos. A continuación se exponen los diagramas de la base de datos utilizados en el contexto de este proyecto. Estos diagramas han sido realizados con la aplicación Microsoft SQL Server Management Studio \cite{sql-server-studio}.
+
 \begin{itemize}
 	\item En la \textit{Figura 2.3} se observa el diagrama de la parte del login y la información de los trabajadores.
 	\item En la \textit{Figura 2.4} se observa el diagrama de los pacientes de la institución.
@@ -180,13 +181,45 @@ Parte de la información que se tiene que enviar a la web se puede obtener de lo
     \label{fig:Diagrama-BD-Presencias}
 \end{figure}
 
-% INCLUIR EN EL ESQUEMA DEL LOGIN LA TABLA DE LOS RECURSOS DONDE ESTARÁN LOS PUESTOS
+% TODO: INCLUIR EN EL ESQUEMA DEL LOGIN LA TABLA DE LOS RECURSOS DONDE ESTARÁN LOS PUESTOS
 
-% REVISAR EL RESTO DE DIAGRAMAS PARA QUE REALMENTE ESTÉ TODO LO QUE SE HA UTILIZADO
 
 \section{Interfaz de usuario}
-
+\label{section-ui}
 % Poner la interfaz final del usuario cuando esté terminada
 
-TODO: Poner la interfaz final del usuario cuando esté terminada
+En esta sección se puede observar la interfaz de usuario final de la aplicación.\\
+
+En la \hyperref[fig:login]{Figura 2.7} se observa la pantalla de inicio de sesión.
+
+En la \hyperref[fig:map]{Figura 2.8}  se observa la pantalla principal donde se puede ver la distribución de plantas, el plano de la planta seleccionada y el carrusel con las alertas de la planta seleccionada.
+
+En la \hyperref[fig:list]{Figura 2.9}  se observa la pantalla principal que contiene la lista de alarmas totales actualmente en el sistema.
+
+\newpage
+
+\begin{landscape}
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=25cm]{Imagenes/login.PNG}
+	\caption{Pantalla de inicio de sesión}
+	\label{fig:login}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=25cm]{Imagenes/map-alarmas-estados.PNG}
+	\caption{Pantalla de plano de alertas}
+	\label{fig:map}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=25cm]{Imagenes/list-pag2.PNG}
+	\caption{Pantalla de lista de alertas}
+	\label{fig:list}
+\end{figure}
+\end{landscape}
+
+
 
