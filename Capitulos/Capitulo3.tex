@@ -53,7 +53,7 @@ En el diagrama se pueden ver distintos paquetes que cumplen distintas funcionali
 
 Otra de las decisiones tomadas en la implementación es utilizar en el login la validación del formulario de bootstrap. De esta forma, los datos no se envían a backend a no ser que todos los campos estén completados. Además, en backend se hace la validación correspondiente, y si hay algún problema se informa al usuario de dicho problema mediante una tarjeta emergente.\\
 
-Como se explicará en la siguiente sección, el frontend tiene la información de los clientes y trabajadores desde el inicio de sesión, y cuando le llega información de nuevas alertas debe completar cierta información con la que ya tiene. Por esta razón, para que sea rápido y eficiente, se decide que esta información estará en diccionarios para un fácil y rápido acceso al dato concreto a utilizar. 
+Como se explicará en la siguiente sección, el frontend tiene la información de los clientes y trabajadores desde el inicio de sesión, y cuando le llega información de nuevas alertas debe completar cierta información con la que ya tiene. Por esta razón, para que sea rápido y eficiente, se decide guardar esta información en diccionarios para un fácil y rápido acceso al dato concreto a utilizar. 
 
 
 \section{Implementación del backend}
@@ -72,9 +72,16 @@ De los servicios y eventos nombrados en la arquitectura detallada del PAServidor
 
 %Explicar decisiones tomadas en la implementación del servicio
 Durante el desarrollo del servicio se han tomado algunas decisiones que se exponen a continuación.
+
 % - Carga de datos iniciales en vez de acceso siempre a base de datos
-Cuando un usuario inicia sesión en la aplicación web se envía una carga de datos iniciales con la información acerca de la configuración del centro (plantas con su información y sus planos), los clientes y los trabajadores. La decisión se toma valorando la cantidad de datos a enviar y el acceso a la base de datos. Se cree conveniente realizarlo de esta forma, sobre todo con los clientes y los trabajadores, para no realizar accesos a la base de datos cada vez que se tenga que enviar información actualizada de alertas, y sea la aplicación web la que complete dicha información. De esta manera el backend es más eficiente y los envíos de la información es más rápido pero el frontend tiene que hacer cierto procesado con la información que le llega para completarla.
-% - TODO: decisión diccionarios y uso
+Cuando un usuario inicia sesión en la aplicación web se envía una carga de datos iniciales con la información acerca de la configuración del centro (plantas con su información y sus planos), los clientes, los trabajadores, y las alertas actuales en el sistema. La decisión se toma valorando la cantidad de datos a enviar y el acceso a la base de datos. Se cree conveniente realizarlo de esta forma, para que la condiguración esté al inicio en la aplicación y en el caso de los clientes y los trabajadores, para no realizar accesos a la base de datos cada vez que se tenga que enviar información actualizada de alertas, y sea la aplicación web la que complete dicha información. De esta manera el backend es más eficiente y los envíos de la información es más rápido, pero el frontend tiene que hacer cierto procesado con la información que le llega para completarla como se ha comentado anteriormente.\\
+
+% - Decisión diccionarios y uso
+Como se ha mencionado en secciones anteriores, las presencias se mandan a todos los puestos, pero las alarmas se deben enviar a los puestos que cumplan ciertas reglas.
+Para saber a qué puestos se debe enviar una alarma, se recibe un evento con esa información, y se utiliza un diccionario cuya clave es cada uno de los puestos disponibles y el valor es un diccionario cuyas claves son los identificadores de las alarmas que deben ser enviadas a ese puesto. Por otro lado, se tiene otro diccionario cuya clave es el nombre del puesto y los valores son un diccionario cuyas claves son los identificadores de las alarmas y el valor son las alarmas (con la información concreta ya procesada) que se envían a cada puesto. Esto es así porque se reciben distintos tipos de eventos según sea para saber a qué puesto notificar en la web, actualización de una alarma, o fin de una alarma. 
+En el caso de las presencias se tiene un diccionario en el que la clave es el identificador de la presencia y el valor es la presencia a enviar.
+Se decide utilizar esta colección para almacenar los datos para que los accesos al insertar, actualizar o eliminar una alarma o presencia concreta sean más rápidos.
+Cabe destacar que en la implementación se ha completado implementado también parte del procesado de alertas de tipo tareas con otro diccionario similar. (Se puede ver más información sobre esto en la \hyperref[section-trabajo-futuro]{sección 5.3} que se habla de trabajo futuro).
 
 
 % TODO: Diagrama de paquetes orfanización código
