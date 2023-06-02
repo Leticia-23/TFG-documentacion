@@ -27,9 +27,9 @@ Para implementar la aplicación web se ha considerado útil contar con el apoyo 
 
 Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código. De esta forma, ha sido más fácil realizar una implementación clara durante el desarrollo. Además, de cara a que la empresa pueda reutilizar el código hace que sea más sencillo comprenderlo. Se puede ver la organización realizada  en tiempo de desarrollo con una vista de módulos en forma de diagrama de paquetes. (Véase \textit{Figura 3.1}).\\
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{Imagenes/Diagrama-paquetes-frontend}
+    \includegraphics[width=12cm]{Imagenes/Diagrama-paquetes-frontend}
     \caption{Diagrama de paquetes frontend}
     \label{fig:paquetes-frontend}
 \end{figure}
@@ -55,7 +55,7 @@ Otra de las decisiones tomadas en la implementación es utilizar en el login la 
 
 Como se explicará en la siguiente sección, el frontend tiene la información de los clientes y trabajadores desde el inicio de sesión, y cuando le llega información de nuevas alertas debe completar cierta información con la que ya tiene. Por esta razón, para que sea rápido y eficiente, se decide guardar esta información en diccionarios para un fácil y rápido acceso al dato concreto a utilizar. 
 
-
+\newpage
 \section{Implementación del backend}
 
 El backend de la aplicación se realiza con \textit{.NET Framework 4.8}, ya que como se ha explicado en secciones anteriores la implementación que se realiza es concretamente añadir funcionalidad a la aplicación existente. \\
@@ -71,51 +71,62 @@ Al principio la empresa propuso realizar la comunicación del backend con el fro
 De los servicios y eventos nombrados en la arquitectura detallada del PAServidor en la \hyperref[section-arquitectura]{sección 2.2}, el servicio que se ha implementado para añadir funcionalidad a la aplicación existente y que sirve como backend de la aplicación web, es el \textit{Servicio de monitorización web} que se puede observar en la sección nombrada, concretamente en la \hyperref[fig:PAServidor]{\textit{Figura 2.2}}.\\
 
 %Explicar decisiones tomadas en la implementación del servicio
-Durante el desarrollo del servicio se han tomado algunas decisiones que se exponen a continuación.
+Durante la implementación del servicio se han tomado distintas decisiones. Algunas de ellas se exponen a continuación.\\
 
 % - Carga de datos iniciales en vez de acceso siempre a base de datos
 Cuando un usuario inicia sesión en la aplicación web se envía una carga de datos iniciales con la información acerca de la configuración del centro (plantas con su información y sus planos), los clientes, los trabajadores, y las alertas actuales en el sistema. La decisión se toma valorando la cantidad de datos a enviar y el acceso a la base de datos. Se cree conveniente realizarlo de esta forma, para que la condiguración esté al inicio en la aplicación y en el caso de los clientes y los trabajadores, para no realizar accesos a la base de datos cada vez que se tenga que enviar información actualizada de alertas, y sea la aplicación web la que complete dicha información. De esta manera el backend es más eficiente y los envíos de la información es más rápido, pero el frontend tiene que hacer cierto procesado con la información que le llega para completarla como se ha comentado anteriormente.\\
 
 % - Decisión diccionarios y uso
 Como se ha mencionado en secciones anteriores, las presencias se mandan a todos los puestos, pero las alarmas se deben enviar a los puestos que cumplan ciertas reglas.
-Para saber a qué puestos se debe enviar una alarma, se recibe un evento con esa información, y se utiliza un diccionario cuya clave es cada uno de los puestos disponibles y el valor es un diccionario cuyas claves son los identificadores de las alarmas que deben ser enviadas a ese puesto. Por otro lado, se tiene otro diccionario cuya clave es el nombre del puesto y los valores son un diccionario cuyas claves son los identificadores de las alarmas y el valor son las alarmas (con la información concreta ya procesada) que se envían a cada puesto. Esto es así porque se reciben distintos tipos de eventos según sea para saber a qué puesto notificar en la web, actualización de una alarma, o fin de una alarma. 
+
+Para saber a qué puestos se debe enviar una alarma, se recibe un evento con esa información, y se utiliza un diccionario cuya clave es cada uno de los puestos disponibles y el valor es un diccionario cuyas claves son los identificadores de las alarmas que deben ser enviadas a ese puesto. Por otro lado, se tiene otro diccionario cuya clave es el nombre del puesto y los valores son un diccionario cuyas claves son los identificadores de las alarmas y el valor son las alarmas (con la información concreta ya procesada) que se envían a cada puesto. Esto es así porque se reciben distintos tipos de eventos según sea para saber a qué puesto notificar en la web, actualización de una alarma, o fin de una alarma.
+
 En el caso de las presencias se tiene un diccionario en el que la clave es el identificador de la presencia y el valor es la presencia a enviar.
 Se decide utilizar esta colección para almacenar los datos para que los accesos al insertar, actualizar o eliminar una alarma o presencia concreta sean más rápidos.
-Cabe destacar que en la implementación se ha completado implementado también parte del procesado de alertas de tipo tareas con otro diccionario similar. (Se puede ver más información sobre esto en la \hyperref[section-trabajo-futuro]{sección 5.3} que se habla de trabajo futuro).
+Cabe destacar que en la implementación se ha completado implementado también parte del procesado de alertas de tipo tareas con otro diccionario similar. (Se puede ver más información sobre esto en la \hyperref[section-trabajo-futuro]{sección 5.3} que se habla de trabajo futuro).\\
 
+Para enviar la información de las alertas se barajó la opción de mandar solo la alerta actualizada y tener cierta lógica en el frontend, o si hacer la lógica completa y envío de todas las alertas actuales en el sistema desde el backend. Finalmente, se optó por esta segunda opción ya que se consideraba que para lo que se necesitaba en estos momentos era la mejor opción para no perder ningún dato si se desconectaba la web del servicio. Para la primera opción, la solución a esto hubiese sido que al reconectar se pidiera la información actual completa.\\
 
-% TODO: Diagrama de paquetes orfanización código
+% Diagrama de paquetes organización código backend
+Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código igual que en el frontend y por las mismas razones. Se puede ver la organización con una vista de módulos en forma de diagrama de paquetes. (Véase \textit{Figura 3.2}).\\
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{Imagenes/Diagrama-paquetes-backend}
+    \caption{Diagrama de paquetes backend}
+    \label{fig:paquetes-backend}
+\end{figure}
 
+Se observa como se tiene un módulo principal \textbf{Servicio\_MonitorizacionWeb} que es donde se procesa la llegada de eventos. Por otro lado se tiene el módulo \textbf{Server} donde se encuentra la lógica para recibir y enviar información a la aplicación web. Los módulos \textbf{Helpers} y \textbf{Models} son utilizados por los dos anteriores.\\
 
 % Explicar comportamiento de servicios y eventos
 \subsection{Comportamiento servicios y eventos}
 \label{subsection-comportamiento}
 % TODO: DIAGRAMAS DE COMPORTAMIENTO para mostrar ejemplo/s de funcionamiento interno.
-Respecto al comportamiento de los servicios y eventos implicados, a continuación se exponen unos ejemplos de funcionamiento.\\
+Respecto al comportamiento de los servicios y eventos implicados, a continuación se exponen uno ejemplo de funcionamiento tanto para alarma como para presencia.\\
 
 El funcionamiento para el caso de las alarmas es el siguiente:
 \begin{enumerate}
 	\item El paciente pulsa el botón del terminal para solicitar ayuda.	
-	\item El terminal notifica al Servicio de Comunicación con Terminales, mediante el socket, que alguien ha pulsado el botón.
-	\item El servicio comunicación con terminales envía un evento \textit{NuevaAlarma} con toda la información relativa al terminal.
-	\item El servicio de alarmas, que está suscrito al evento \textit{NuevaAlarma}, recibe el evento y lo procesa. Es necesario acceder a la base de datos para obtener información necesaria. Como resultado envía un evento \textit{NotificarAlarmaEnMonitorWeb}.
-	\item El servicio de monitorización web recibe el evento \textit{NotificarAlarmaEnMonitorWeb} al que está suscrito y lo procesa, envíando mediante websocket la información conveniente a la aplicación web.
-	\item En la aplicación web aparecerá la nueva alarma.
-	\item El Servicio de Monitorización web recibe el evento \textit{SAEvento\_NuevaAccionPendiente} cuando se producen alarmas y lo procesa si le ha llegado el evento \textit{NotificarAlarmaEnMonitorWeb} para actualizar la alarma indicada, y el resultado de la actualización es envíado mediante el websocket a la aplicación web.
-	\item En la aplicación web aparecerá la alarma actualizada.
-	\item El Servicio de Monitorización web recibe el evento \textit{SAEvento\_DisparoAvisoFinalizado} cuando se codifica una alarma y lo procesa si le ha llegado el evento de \textit{NotificarAlarmaEnMonitorWeb} para eliminar la alarma indicada, y el resultado de la actualización es envíado mediante el websocket a la aplicación web.
-	\item En la aplicación web desaparecerá la alarma actualizada.
+	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien ha pulsado el botón.
+	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaAlarma} con toda la información relativa al terminal.
+	\item El \textit{servicio de alarmas}, que está suscrito al evento \textit{NuevaAlarma}, recibe el evento y lo procesa. Como resultado envía un evento \textit{NuevaAccionPendiente} y \textit{NotificarAlarmaEnMonitorWeb}.
+	\item El \textit{servicio de monitorización web} en primer lugar recibe el evento \textit{NuevaAccionPendiente} al que está suscrito pero se ignora ya que aún no se ha recibido el evento \textit{NotificarAlarmaEnMonitorWeb}. Seguido se recibe el evento \textit{NotificarAlarmaEnMonitorWeb} y se procesa, envíando mediante websocket la información conveniente a la aplicación web.
+	\item En la aplicación web aparece la nueva alarma. Después se efectuará una presencia en el terminal. (Véase el comportamiento específico para las presencias).
+	\item El \textit{servicio de monitorización web} recibe un evento \textit{NuevaAccionPendiente} cuando se actualiza la alarma y lo procesa si ha llegado el evento \textit{NotificarAlarmaEnMonitorWeb} para actualizar la alarma indicada. El resultado de la actualización es envíado mediante el websocket a la aplicación web.
+	\item En la aplicación web aparece la alarma actualizada y después en el terminal un trabajador codifica la alarma y elimina su presencia. (Véase el comportamiento específico para las presencias).
+	\item El \textit{servicio de monitorización web} recibe el evento \textit{DisparoAvisoFinalizado} cuando se codifica una alarma y lo procesa si le ha llegado el evento de \textit{NotificarAlarmaEnMonitorWeb} para eliminar la alarma indicada. El resultado de la actualización de las alarmas en el sistema es envíado mediante el websocket a la aplicación web.
+	\item En la aplicación web desaparece la alarma actualizada.
 \end{enumerate}
 
 El funcionamiento para el caso de las presencias es el siguiente:
 
 \begin{enumerate}
 	\item Un trabajador se identifica en la habitación pasando su tarjeta personal por el lector o con el su PIN.
-	\item El terminal notifica al Servicio de Comunicación con Terminales, mediante el socket, que alguien está presente.
-	\item El Servicio de Comunicación con Terminales envía un evento \textit{NuevaPresencia} con toda la información relativa a la presencia.
-	\item El servicio de alarmas que está suscrito al evento \textit{NuevaPresencia} recibe el evento y lo procesa. Es necesario acceder a la Base de Datos para obtener información necesaria. Como resultado envía un evento \textit{PAEvento\_NotificarEstadoPresencias}.
-	\item El servicio de monitorización web recibe el evento \textit{PAEvento\_NotificarEstadoPresencias} que puede ser de las presencias actuales, de una presencia nueva, actualizada o eliminada y lo procesa. Como resultado envía la información necesaria mediante el websocket a la aplicación web.
+	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien está presente.
+	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaPresencia} con toda la información relativa a la presencia.
+	\item El \textit{servicio de alarmas} que está suscrito al evento \textit{NuevaPresencia} recibe el evento y lo procesa. Como resultado envía un evento \textit{NotificarEstadoPresencias}.
+	\item El \textit{servicio de monitorización web} recibe el evento \textit{NotificarEstadoPresencias} que puede ser de las presencias actuales, de una presencia nueva, actualizada o eliminada y lo procesa. Como resultado envía la información necesaria mediante el websocket a la aplicación web.
 	\item En la aplicación web aparece, se actualiza o desaparece la presencia.
 \end{enumerate}
 

@@ -142,7 +142,45 @@ Se puede ver el comportamiento de esta arquitectura en el contexto de este proye
 
 % Explicar qué partes de la base de datos utilizo de su sistema y con diagramas
 
-TODO: explicar qué tablas de la base de datos utilizo de su sistema y adjuntaré  diagramas creados con la aplicación Microsoft SQL Server Management. \\
+Para llevar a cabo el desarrollo, fue proporcionada por parte de la empresa una base de datos de prueba configurada siguiendo el modelo de datos existente de la aplicación de Ibernex.\\
+
+Parte de la información que se tiene que enviar a la web se puede obtener de los eventos que se reciben en el servicio, pero la otra parte es necesario acceder a la base de datos para obtenerla. A continuación se exponen los diagramas de la base de datos utilizados en el contexto de este proyecto.
+\begin{itemize}
+	\item En la \textit{Figura 2.3} se observa el diagrama de la parte del login y la información de los trabajadores.
+	\item En la \textit{Figura 2.4} se observa el diagrama de los pacientes de la institución.
+	\item En la \textit{Figura 2.5} se observa el diagrama necesario para procesar las alarmas.
+	\item En la \textit{Figura 2.6} se observa el diagrama necesario para procesar las presencias.
+\end{itemize}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{Imagenes/Diagrama-BD-Login}
+    \caption{Diagrama base de datos - Trabajadores}
+    \label{fig:Diagrama-BD-Login}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{Imagenes/Diagrama-BD-Clientes}
+    \caption{Diagrama base de datos - Clientes}
+    \label{fig:Diagrama-BD-Clientes}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{Imagenes/Diagrama-BD-Alertas}
+    \caption{Diagrama base de datos - Alarmas}
+    \label{fig:Diagrama-BD-}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{Imagenes/Diagrama-BD-Presencias}
+    \caption{Diagrama base de datos - Presencias}
+    \label{fig:Diagrama-BD-Presencias}
+\end{figure}
 
 % INCLUIR EN EL ESQUEMA DEL LOGIN LA TABLA DE LOS RECURSOS DONDE ESTARÁN LOS PUESTOS
 
