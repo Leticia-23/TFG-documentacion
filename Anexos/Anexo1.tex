@@ -8,7 +8,7 @@ En el proceso de diseño de la arquitectura software del proyecto se evaluan dis
     \item El problema de compatibilidad de utilizar SignalR (Véase  \hyperref[anexo-b]{Anexo B}) para comunicar la aplicación de Ibernex y la aplicación web.
 \end{itemize}
 
-En un principio, el diseño de arquitetura propuesto por la empresa es el que se puede ver en la \textit{Figura A.1}. Lo que proponían incluía un middleware para realizar una autenticación mediante API REST utilizando JWT (Véase \hyperref[anexo-c]{Anexo C}) y la comunicación entre los componentes de la arquitecura con websockets utilizando SignalR.  
+En un principio, el diseño de arquitetura propuesto por la empresa es el que se puede ver en la Figura A.1. Lo que proponían incluía un middleware para realizar una autenticación mediante API REST utilizando JWT (Véase \hyperref[anexo-c]{Anexo C}) y la comunicación entre los componentes de la arquitecura con websockets utilizando SignalR.  
 
 \begin{figure}[!h]
     \centering
@@ -27,7 +27,7 @@ Por esta razón, se buscan alternativas para utilizar SignalR. Las propuesta que
     \item Realizar la comunicación entre aplicación web y servicio de PAServidor directamente con websockets sin utilizar SignalR.
 \end{enumerate}
 
-Para la primera opción el diagrama de despliegue que se propone a la empresa es el que se puede ver en la \textit{Figura A.2}. Aquí se pueden ver una aplicación web React, un servidor web que hace de proxy con ASP .NET Core (que sí es compatible con SignalR) y PAServidor, como tres proyectos independientes. Pero, para esta solución, la empresa pensaba que lo que se haría sería algo similar teniendo un único proyecto incluyendo la aplicación web y el servidor web (un proyecto en el entorno de desarrollo de Microsoft Visual Studio en el que se crea una aplicación ASP.NET Core con React \cite{vs-project} ) y por otro lado el PAServidor (Véase \textit{Figura A.3})\\
+Para la primera opción el diagrama de despliegue que se propone a la empresa es el que se puede ver en la Figura A.2. Aquí se pueden ver una aplicación web React, un servidor web que hace de proxy con ASP .NET Core (que sí es compatible con SignalR) y PAServidor, como tres proyectos independientes. Pero, para esta solución, la empresa pensaba que lo que se haría sería algo similar teniendo un único proyecto incluyendo la aplicación web y el servidor web (un proyecto en el entorno de desarrollo de Microsoft Visual Studio en el que se crea una aplicación ASP.NET Core con React \cite{vs-project} ) y por otro lado el PAServidor (Véase la Figura A.3)\\
 
 \begin{figure}[H]
     \centering
@@ -46,7 +46,7 @@ Para la primera opción el diagrama de despliegue que se propone a la empresa es
 
 Finalmente, se decide junto con la empresa que es innecesario tener un servidor web si la comunicación se puede hacer directamente entre la aplicación web y PAServidor, aunque sea sin utilizar SignalR (ya que la empresa no contaba con la incompatibilidad).\\
 
-Por esta razón, para la segunda opción el diagrama de despliegue que se propone a la empresa es el de la arquitectura final elegida para el proyecto que es la que se puede ver en la \hyperref[fig:despliegue]{\textit{Figura 2.1}} que se encuentra en una de las secciones anteriores.
+Por esta razón, para la segunda opción el diagrama de despliegue que se propone a la empresa es el de la arquitectura final elegida para el proyecto que es la que se puede ver en la \hyperref[fig:despliegue]{Figura 2.1} que se encuentra en una de las secciones anteriores.
 
 
 

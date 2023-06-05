@@ -25,7 +25,7 @@ Para implementar la aplicación web se ha considerado útil contar con el apoyo 
 
  % Explicar organización de ficheros en frontend indicando que cierta división de los módulos hace que la organización del código queda bien repartida teniendo las funcionalidades para poder ver a simple vista implementado
 
-Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código. De esta forma, ha sido más fácil realizar una implementación clara durante el desarrollo. Además, de cara a que la empresa pueda reutilizar el código hace que sea más sencillo comprenderlo. Se puede ver la organización realizada  en tiempo de desarrollo con una vista de módulos en forma de diagrama de paquetes. (Véase \textit{Figura 3.1}).\\
+Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código. De esta forma, ha sido más fácil realizar una implementación clara durante el desarrollo. Además, de cara a que la empresa pueda reutilizar el código hace que sea más sencillo comprenderlo. Se puede ver la organización realizada  en tiempo de desarrollo con una vista de módulos en forma de diagrama de paquetes. (Véase la Figura 3.1).\\
 
 \begin{figure}[H]
     \centering
@@ -51,7 +51,7 @@ En el diagrama se pueden ver distintos paquetes que cumplen distintas funcionali
 \end{itemize}
 
 
-Otra de las decisiones tomadas en la implementación es utilizar en el login la validación del formulario de bootstrap. De esta forma, los datos no se envían a backend a no ser que todos los campos estén completados. Además, en backend se hace la validación correspondiente, y si hay algún problema se informa al usuario de dicho problema mediante una tarjeta emergente. (Se puede ver un ejemplo en la \hyperref[fig:login-error]{\textit{Figura E.1}} del \hyperref[anexo-e]{Anexo E}).\\
+Otra de las decisiones tomadas en la implementación es utilizar en el login la validación del formulario de bootstrap. De esta forma, los datos no se envían a backend a no ser que todos los campos estén completados. Además, en backend se hace la validación correspondiente, y si hay algún problema se informa al usuario de dicho problema mediante una tarjeta emergente. (Se puede ver un ejemplo en la \hyperref[fig:login-error]{Figura E.1} del \hyperref[anexo-e]{Anexo E}).\\
 
 Como se explicará en la siguiente sección, el frontend tiene la información de los clientes y trabajadores desde el inicio de sesión, y cuando le llega información de nuevas alertas debe completar cierta información con la que ya tiene. Por esta razón, para que sea rápido y eficiente, se decide guardar esta información en diccionarios para un fácil y rápido acceso al dato concreto a utilizar. 
 
@@ -68,7 +68,7 @@ Al principio la empresa propuso realizar la comunicación del backend con el fro
 
 
 % Explicar qué SERVICIO implemento dentro de la arquitectura
-De los servicios y eventos nombrados en la arquitectura detallada del PAServidor en la \hyperref[section-arquitectura]{sección 2.2}, el servicio que se ha implementado para añadir funcionalidad a la aplicación existente y que sirve como backend de la aplicación web, es el \textit{Servicio de monitorización web} que se puede observar en la sección nombrada, concretamente en la \hyperref[fig:PAServidor]{\textit{Figura 2.2}}.\\
+De los servicios y eventos nombrados en la arquitectura detallada del PAServidor en la \hyperref[section-arquitectura]{sección 2.2}, el servicio que se ha implementado para añadir funcionalidad a la aplicación existente y que sirve como backend de la aplicación web, es el \textit{Servicio de monitorización web} que se puede observar en la sección nombrada, concretamente en la \hyperref[fig:PAServidor]{Figura 2.2}.\\
 
 %Explicar decisiones tomadas en la implementación del servicio
 Durante la implementación del servicio se han tomado distintas decisiones. Algunas de ellas se exponen a continuación.\\
@@ -88,7 +88,7 @@ Cabe destacar que en la implementación se ha completado implementado también p
 Para enviar la información de las alertas se barajó la opción de mandar solo la alerta actualizada y tener cierta lógica en el frontend, o si hacer la lógica completa y envío de todas las alertas actuales en el sistema desde el backend. Finalmente, se optó por esta segunda opción ya que se consideraba que para lo que se necesitaba en estos momentos era la mejor opción para no perder ningún dato si se desconectaba la web del servicio. Para la primera opción, la solución a esto hubiese sido que al reconectar se pidiera la información actual completa.\\
 
 % Diagrama de paquetes organización código backend
-Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código igual que en el frontend y por las mismas razones. Se puede ver la organización con una vista de módulos en forma de diagrama de paquetes. (Véase \textit{Figura 3.2}).\\
+Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código igual que en el frontend y por las mismas razones. Se puede ver la organización con una vista de módulos en forma de diagrama de paquetes. (Véase la Figura 3.2).\\
 
 \begin{figure}[H]
     \centering
