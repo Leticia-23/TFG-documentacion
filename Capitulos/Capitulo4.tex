@@ -1,30 +1,29 @@
 \chapter{Gestión del proyecto}
-% \section{Planificación del proyecto}
 
-%Comentario puesto por Javier en versión 1 enviada
-% Esta sección no la subdividiría. Pon una planificación inicial, la final, y comenta el porqué de las variaciones
+Como proceso de inicio se establecieron con la empresa los objetivos y herramientas de trabajo del proyecto (nombrados en secciones anteriores). Además, se propuso al responsable del proyecto en la empresa una planificación inicial para organizar el trabajo de forma que se cumplieran los objetivos dentro del tiempo establecido. \\
 
-Como proceso de inicio se establecieron con la empresa los objetivos y herramientas de trabajo del proyecto (nombrados en secciones anteriores). Además, se realizó una planificación inicial para organizar el trabajo de forma que se cumplieran los objetivos dentro del tiempo establecido. \\
+Respecto al proceso de ejecución y control del proyecto, al ser un proyecto realizado de forma remota, se realizan regularmente reuniones mediante Google Meet con el responsable en la empresa. Por otro lado, para controlar el tiempo invertido en el proyecto se diseña una plantilla en la que diariamente se anotan las horas invertidas y se describen notas acerca del estado del proyecto o las tareas realizadas. \\
 
-Respecto al proceso de ejecución y control del proyecto cabe destacar que al ser un proyecto realizado de forma remota, se realizan regularmente reuniones mediante Google Meet con el responsable en la empresa. Por otro lado para controlar el tiempo invertido en el proyecto se diseña una plantilla en la que diariamente se anotan las horas invertidas y se describen notas acerca del estado del proyecto o las tareas realizadas. \\
-
-Como plan de gestión de configuraciones se establece que la documentación del proyecto se realiza en castellano. La implementación del frontend se realiza completamente en inglés y la implementación del backend se realiza utilizando inglés y castellano principalmente para que la empresa comprenda con mayor facilidad los comentarios en el código. Se destaca que en la implementación del frontend se configura el proyecto para utilzar Prettier \cite{prettier} y ESLint \cite{eslint} para formatear, analizar y detectar problemas en el código mejorando así la calidad del código. Respecto al control y alojamiento del código, se utiliza Git, GitHub para el frontend y un repositorio de la empresa para el backend. \\
+Como plan de gestión de configuraciones se establece que la documentación del proyecto se realiza en castellano. La implementación del frontend se realiza completamente en inglés y la implementación del backend se realiza utilizando inglés y castellano principalmente para que la empresa comprenda con mayor facilidad los comentarios en el código. Se destaca que, en la implementación del frontend, se configura el proyecto para utilzar Prettier \cite{prettier} y ESLint \cite{eslint} para formatear, analizar y detectar problemas en el código mejorando así la calidad del este. Respecto al control y alojamiento del código, se utiliza Git y GitHub para el frontend y un repositorio de la empresa para el backend. \\
 
 
 Respecto al plan de construcción y despliegue del software se establece con la empresa que es suficiente con realizar la implementación y comporbar el funcionamiento del sistema con la conexión de los terminales en local, ya que posteriormente será la empresa la que utilizará el código como considere. \\
 
 La planificación del proyecto como se ha comentado anteriormente se hizo al inicio del proyecto. Se establecío que el cronograma del trabajo a realizar debía ser el siguiente:
-\begin{itemize}
+\begin{enumerate}
     \item Puesta en contexto, arranque de sistema de configuraciones y aprendizaje de herramientas y tecnologías a utilizar.
-    \item Desarrollo del sistema siguiendo el siguiente orden:
-    \begin{enumerate}
+    \item Desarrollo del software dividido en las siguientes tareas:
+    \begin{itemize}
         \item Revisión de diseño y requisitos con la empresa.
-        \item Desarrollo del software, realizando primero el mockup del frontend, seguido de la implementación del backend y por último la unión del frontend y backend comprobando el correcto funcionamiento del sistema.
-    \end{enumerate}
+        \item Implementación del mockup del frontend.
+        \item Implementación del backend (nuevo servicio en Helpnex).
+        \item Union del frontend y backend.
+        \item Comprobar correcto funcionamiento del sistema.
+    \end{itemize}
     \item Documentación del proyecto (habiendo tomado las notas necesarias durante todo el desarrollo).
-\end{itemize}
+\end{enumerate}
 
-Se puede observar el Diagrama de Gantt en la \hyperref[fig:fig:gantt]{Figura 4.1}, en el que se refleja las tareas realizadas y el momento y duración dentro del proyecto de estas. Se destaca que se ha cumplido con la planificación inicial establecida. En la planificación inicial se dió un par de semanas de margen para finalizar la implementación por si surgía cualquier problema. Gracias a esta previsión, el tiempo invertido durante las dos primeras semanas de abril con el problema de utilizar la tencología SignalR (mencionado en otras secciones) realizando en pruebas, búsqueda de soluciones y planteamiento de las distintas opciones de la arquitectura, no ha supuesto un problema a la hora de finalizar con éxito la implementación y entrega del proyecto.
+En el Diagrama de Gantt (Véase \hyperref[fig:gantt]{Figura 4.1}) se pueden ver las tareas realizadas y el momento y duración dentro del proyecto de estas. En la planificación inicial se dió un par de semanas de margen para finalizar la implementación por si surgía cualquier inconveniente. Gracias a esta previsión, el tiempo invertido durante las dos primeras semanas de abril con el problema de utilizar la tencología SignalR (mencionado en otras secciones) realizando en pruebas, búsqueda de soluciones y planteamiento de las distintas opciones de la arquitectura, no ha supuesto un problema a la hora de finalizar con éxito la implementación y entrega del proyecto. Se comnsidera que el resto de planificación inicial es similar a la que se puede ver en el diagrama y que ha sido comentada en los enumeración. 
 
 \begin{landscape}
     \begin{figure}[!ht]
