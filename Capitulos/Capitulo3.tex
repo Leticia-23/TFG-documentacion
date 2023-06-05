@@ -83,7 +83,7 @@ Para saber a qué puestos se debe enviar una alarma, se recibe un evento con esa
 
 En el caso de las presencias se tiene un diccionario en el que la clave es el identificador de la presencia y el valor es la presencia a enviar.
 Se decide utilizar esta colección para almacenar los datos para que los accesos al insertar, actualizar o eliminar una alarma o presencia concreta sean más rápidos.
-Cabe destacar que en la implementación se ha completado implementado también parte del procesado de alertas de tipo tareas con otro diccionario similar. (Se puede ver más información sobre esto en la \hyperref[section-trabajo-futuro]{sección 5.3} que se habla de trabajo futuro).\\
+Cabe destacar que en la implementación se ha completado implementado también parte del procesado de alertas de tipo tareas con otro diccionario similar. (Se puede ver más información sobre esto en el \hyperref[section-gestion-proyecto]{capítulo 4} y la \hyperref[section-trabajo-futuro]{sección 5.3}).\\
 
 Para enviar la información de las alertas se barajó la opción de mandar solo la alerta actualizada y tener cierta lógica en el frontend, o si hacer la lógica completa y envío de todas las alertas actuales en el sistema desde el backend. Finalmente, se optó por esta segunda opción ya que se consideraba que para lo que se necesitaba en estos momentos era la mejor opción para no perder ningún dato si se desconectaba la web del servicio. Para la primera opción, la solución a esto hubiese sido que al reconectar se pidiera la información actual completa.\\
 
