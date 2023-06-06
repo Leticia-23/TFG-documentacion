@@ -113,7 +113,7 @@ Con este diagrama se observan los elementos que han estado implicados en el proy
 \begin{itemize}
 	\item \textbf{Plataforma Asistencial Servidor (PAServidor)} es la aplicación servidor del sistema asistencial Helpnex. Se trata de una aplicación monolítica modular. Dos de los elementos que componen la arquitectura de la aplicación son:
 	\begin{itemize}
-		\item Servicios: contienen la lógica del sistema Helpnex. Los servicios se cargan al inicio de la aplicación en función de la licencia adquirida. Cada servicio es el encargado de realizar una tarea específica. Algunos ejemplos de tareas son: comunicación con los terminales de habitación, gestionar las alarmas del sistema, comunicación con la aplicación web de monitorización, localización en interiores y comunicaciones SIP, entre otras.
+		\item Servicios: contienen la lógica del sistema Helpnex. Los servicios se cargan al inicio de la aplicación en función de la licencia adquirida. Cada servicio es el encargado de realizar una tarea específica. Algunos ejemplos de tareas son: comunicación con los terminales de habitación; gestionar las alarmas del sistema; comunicación con la aplicación web de monitorización; localización en interiores; y comunicaciones SIP, entre otras.
 		\item Cola de eventos: es el mecanismo de comunicación que utilizan los servicios para transmitir información entre ellos. Cada servicio se suscribe a una serie de eventos.
 	\end{itemize}
 	\item La \textbf{base de datos} es la que permite realizar la persistencia de datos de PAServidor, PACliente, la institución, los pacientes y resto de datos necesarios.
@@ -241,7 +241,7 @@ En la Figura \ref{fig:Diagrama-BD-Presencias} se presenta la parte del modelo co
 En esta sección se explica la interfaz de usuario final de la aplicación y en el \hyperref[anexo-e]{Anexo E} se puede observar más ejemplos de dicha interfaz.\\
 
 
-Al iniciar la aplicación, si el navegador no tiene una sesión iniciada, el sistema carga la pantalla de inicio de sesión de la Figura \ref{fig:login}. \\ 
+Al iniciar la aplicación, si el navegador no tiene una sesión iniciada el sistema carga la pantalla de inicio de sesión de la Figura \ref{fig:login}. \\ 
 
 En caso de que exista un usuario con una sesión iniciada el sistema carga como pantalla principal la de la Figura \ref{fig:map}. Esta pantalla muestra las distintas plantas existentes en la institución y la cantidad de alarmas o presencias activas en dicha planta. En la parte superior se observa el carrusel con las alertas activas en el sistema pertenecientes a la planta seleccionada. A la derecha se observa el plano de la planta seleccionada. En este plano además se muestra la información referente a la ubicación de alarmas y presencias. En cada habitación si hay alguna alerta activa se colorea el espacio y se muestra un icono de la alerta con más prioridad de las existentes en el carrusel pertenecientes a dicha habitación, coloreandola según el tipo de alerta (alarma o presencia) y su estado (en caso de ser alarma) siguiendo este orden de prioridad:
 \begin{enumerate}
