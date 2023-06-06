@@ -68,7 +68,7 @@ Seguidamente, se presentan, en modo de tabla, los principales requisitos del sis
 	% \end{tabular}
 % \end{table}
 
-Los requisitos no funcionales definen los atributos de calidad del sistema describiendo de qué manera opera el sistema. Se presentan a coninuación (véase tabla \ref{tab:RNF}).
+Los requisitos no funcionales definen los atributos de calidad del sistema describiendo de qué manera opera el sistema. Se presentan a continuación (véase tabla \ref{tab:RNF}).
 
 \begin{longtable}{|p{1,2cm}|p{13,8cm}|}
 	\hline
@@ -157,11 +157,11 @@ Con más detalle el comportamiento es el siguiente:
 	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien ha pulsado el botón.
 	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaAlarma} con toda la información relativa al terminal.
 	\item El \textit{servicio de alarmas}, que está suscrito al evento \textit{NuevaAlarma}, recibe el evento y lo procesa. Como resultado envía un evento \textit{NuevaAccionPendiente} y \textit{NotificarAlarmaEnMonitorWeb}.
-	\item El \textit{servicio de monitorización web} en primer lugar recibe el evento \textit{NuevaAccionPendiente} al que está suscrito pero se ignora ya que aún no se ha recibido el evento \textit{NotificarAlarmaEnMonitorWeb}. Seguido se recibe el evento \textit{NotificarAlarmaEnMonitorWeb} y se procesa, envíando mediante websocket la información conveniente a la aplicación web.
+	\item El \textit{servicio de monitorización web} en primer lugar recibe el evento \textit{NuevaAccionPendiente} al que está suscrito pero se ignora ya que aún no se ha recibido el evento \textit{NotificarAlarmaEnMonitorWeb}. Seguido se recibe el evento \textit{NotificarAlarmaEnMonitorWeb} y se procesa, enviando mediante websocket la información conveniente a la aplicación web.
 	\item En la aplicación web aparece la nueva alarma. Después se efectuará una presencia en el terminal. (Véase el comportamiento específico para las presencias).
-	\item El \textit{servicio de monitorización web} recibe un evento \textit{NuevaAccionPendiente} cuando se actualiza la alarma y lo procesa si ha llegado el evento \textit{NotificarAlarmaEnMonitorWeb} para actualizar la alarma indicada. El resultado de la actualización es envíado mediante el websocket a la aplicación web.
+	\item El \textit{servicio de monitorización web} recibe un evento \textit{NuevaAccionPendiente} cuando se actualiza la alarma y lo procesa si ha llegado el evento \textit{NotificarAlarmaEnMonitorWeb} para actualizar la alarma indicada. El resultado de la actualización es enviado mediante el websocket a la aplicación web.
 	\item En la aplicación web aparece la alarma actualizada y después en el terminal un trabajador codifica la alarma y elimina su presencia. (Véase el comportamiento específico para las presencias).
-	\item El \textit{servicio de monitorización web} recibe el evento \textit{DisparoAvisoFinalizado} cuando se codifica una alarma y lo procesa si le ha llegado el evento de \textit{NotificarAlarmaEnMonitorWeb} para eliminar la alarma indicada. El resultado de la actualización de las alarmas en el sistema es envíado mediante el websocket a la aplicación web.
+	\item El \textit{servicio de monitorización web} recibe el evento \textit{DisparoAvisoFinalizado} cuando se codifica una alarma y lo procesa si le ha llegado el evento de \textit{NotificarAlarmaEnMonitorWeb} para eliminar la alarma indicada. El resultado de la actualización de las alarmas en el sistema es enviado mediante el websocket a la aplicación web.
 	\item En la aplicación web desaparece la alarma actualizada.
 \end{enumerate}
 
@@ -178,7 +178,7 @@ El funcionamiento para el caso de las presencias es el que se presenta en la \hy
 
 Con más detalle el comportamiento es el siguiente:
 \begin{enumerate}
-	\item Un trabajador se identifica en la habitación pasando su tarjeta personal por el lector o con el su PIN.
+	\item Un trabajador se identifica en la habitación pasando su tarjeta personal por el lector o con introduciendo su PIN personal.
 	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien está presente.
 	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaPresencia} con toda la información relativa a la presencia.
 	\item El \textit{servicio de alarmas} que está suscrito al evento \textit{NuevaPresencia} recibe el evento y lo procesa. Como resultado envía un evento \textit{NotificarEstadoPresencias}.
@@ -214,7 +214,7 @@ En la Figura 2.6 se presenta la parte del modelo correspondiente a los clientes,
 \end{figure}
 
 \newpage
-En la Figura 2.7 se presenta la parte del modelo en la que se encuentra toda la información de las alarmas en el sistema. De las tablas de este diagrma se obtiene la información necesaria a procesar en los distintos servicios y enviar la información necesaria en los eventos correspondientes en Helpnex. En otros casos es necesario realizar accesos a la base de datos para obtener la información necesaria a monitorizar en la web.
+En la Figura 2.7 se presenta la parte del modelo en la que se encuentra toda la información de las alarmas en el sistema. De las tablas de este diagrama se obtiene la información necesaria a procesar en los distintos servicios y enviar la información necesaria en los eventos correspondientes en Helpnex. En otros casos es necesario realizar accesos a la base de datos para obtener la información necesaria a monitorizar en la web.
 
 \begin{figure}[H]
     \centering
@@ -243,7 +243,7 @@ En esta sección se explica la interfaz de usuario final de la aplicación y en 
 
 Al iniciar la aplicación, si el navegador no tiene una sesión iniciada, el sistema carga la pantalla de inicio de sesión de la \hyperref[fig:map]{Figura 2.9}. \\ 
 
-En caso de que exista un usuario con una sesión iniciada, el sistema carga como pantalla principal la de la \hyperref[fig:map]{Figura 2.10}. Esta pantalla muestra las distintas plantas existentes en la institución y la cantidad de alarmas o presencias activas en dicha planta. En la parte superior se observa el carrusel con las alertas activas en el sistema pertenecientes a la planta seleccionada. A la derecha se observa el plano de la planta seleccionada. En este plano además se muestra la información referente a la ubicación de alarmas y presencias. En cada habitación, si hay alguna alerta activa se colorea el espacio y se muestra un icono de la alerta con más prioirdad de las existentes en el carrusel pertenecientes a dicha habitación, coloreandola según el tipo de alerta (alarma o presencia) y su estado (en caso de ser alarma) siguiendo este orden de prioridad:
+En caso de que exista un usuario con una sesión iniciada, el sistema carga como pantalla principal la de la \hyperref[fig:map]{Figura 2.10}. Esta pantalla muestra las distintas plantas existentes en la institución y la cantidad de alarmas o presencias activas en dicha planta. En la parte superior se observa el carrusel con las alertas activas en el sistema pertenecientes a la planta seleccionada. A la derecha se observa el plano de la planta seleccionada. En este plano además se muestra la información referente a la ubicación de alarmas y presencias. En cada habitación, si hay alguna alerta activa se colorea el espacio y se muestra un icono de la alerta con más prioridad de las existentes en el carrusel pertenecientes a dicha habitación, coloreandola según el tipo de alerta (alarma o presencia) y su estado (en caso de ser alarma) siguiendo este orden de prioridad:
 \begin{enumerate}
 	\item Rojo: alerta de tipo alarma y estado disparada
 	\item Amarillo: alerta de tipo alarma y estado aceptada
