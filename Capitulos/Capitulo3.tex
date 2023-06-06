@@ -25,7 +25,7 @@ Para implementar la aplicación web se ha considerado útil contar con el apoyo 
 
  % Explicar organización de ficheros en frontend indicando que cierta división de los módulos hace que la organización del código queda bien repartida teniendo las funcionalidades para poder ver a simple vista implementado
 
-Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código. De esta forma, ha sido más fácil realizar una implementación clara durante el desarrollo. Además, de cara a que la empresa pueda reutilizar el código hace que sea más sencillo comprenderlo. Se puede ver la organización realizada  en tiempo de desarrollo con una vista de módulos en forma de diagrama de paquetes. (Véase la Figura 3.1).\\
+Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código. De esta forma, ha sido más fácil realizar una implementación clara durante el desarrollo. Además, de cara a que la empresa pueda reutilizar el código hace que sea más sencillo comprenderlo. Se puede ver la organización realizada  en tiempo de desarrollo con una vista de módulos en forma de diagrama de paquetes (véase la Figura \ref{fig:paquetes-frontend}).\\
 
 \begin{figure}[H]
     \centering
@@ -37,7 +37,7 @@ Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hor
 
 En el diagrama se pueden ver distintos paquetes que cumplen distintas funcionalidades. Se explican a continuación:
 
-\textbf{app web} contiene \textit{package.json} que es un archivo de metadatos que contiene información sobre el proyecto como las dependencias; \textbf{node\_modules} que contiene todos los paquetes y dependencias de npm que se especifican en el archivo anterior; y \textit{eslintrc.json} que es el archivo de configuración para ESLint y que se ha utilizado para tener un código limpio y libre de errores. Por otro lado, se tienen los paquetes:
+\textbf{app web} contiene \textit{package.json} que es un archivo de metadatos que contiene información sobre el proyecto como las dependencias; \textbf{node\_modules} que contiene todos los paquetes y dependencias de npm que se especifican en el archivo anterior; y \textit{eslintrc.json} que es el archivo de configuración para ESLint y que se ha utilizado para tener un código limpio y libre de errores. Además, se tienen los paquetes:
 \begin{itemize}
 	\item \textbf{public} que contiene archivos estáticos para el navegador. \textit{assets} contiene imágenes para la aplicación; \textit{manifest.json} y \textit{index.html} que son archivos de configuración de la página web; y otros iconos como el utilizado como favicon.
 	\item \textbf{src} Contiene distintos modulos esenciales que son el punto de entrada de la aplicación, la navegación y la configuración de ciertos estilos de la aplicación. Además, se puede ver la organización escogida a la hora de implementar la aplicación con la explicación de la funcionalidad de los paquetes que contiene:
@@ -51,9 +51,9 @@ En el diagrama se pueden ver distintos paquetes que cumplen distintas funcionali
 \end{itemize}
 
 
-Otra de las decisiones tomadas en la implementación es utilizar en el login la validación del formulario de bootstrap. De esta forma, los datos no se envían a backend a no ser que todos los campos estén completados. Además, en backend se hace la validación correspondiente, y si hay algún problema se informa al usuario de dicho problema mediante una tarjeta emergente. (Se puede ver un ejemplo en la \hyperref[fig:login-error]{Figura E.1} del \hyperref[anexo-e]{Anexo E}).\\
+Otra de las decisiones tomadas en la implementación es utilizar en el login la validación del formulario de bootstrap. De esta forma, los datos no se envían a backend a no ser que todos los campos estén completados. Además, en backend se hace la validación correspondiente y si hay algún problema se informa al usuario de dicho problema mediante una tarjeta emergente. (Se puede ver un ejemplo en la \hyperref[fig:login-error]{Figura E.1} del \hyperref[anexo-e]{Anexo E}).\\
 
-Como se explicará en la siguiente sección, el frontend tiene la información de los clientes y trabajadores desde el inicio de sesión, y cuando le llega información de nuevas alertas debe completar cierta información con la que ya tiene. Por esta razón, para que sea rápido y eficiente, se decide guardar esta información en diccionarios para un fácil y rápido acceso al dato concreto a utilizar. 
+Como se explicará en la siguiente sección, el frontend tiene la información de los clientes y trabajadores desde el inicio de sesión y cuando le llega información de nuevas alertas debe completar cierta información con la que ya tiene. Por esta razón, para que sea rápido y eficiente, se decide guardar esta información en diccionarios para un fácil y rápido acceso al dato concreto a utilizar. 
 
 \newpage
 \section{Implementación del backend}
@@ -68,27 +68,27 @@ Al principio la empresa propuso realizar la comunicación del backend con el fro
 
 
 % Explicar qué SERVICIO implemento dentro de la arquitectura
-De los servicios y eventos nombrados en la arquitectura detallada del PAServidor en la \hyperref[section-arquitectura]{sección 2.2}, el servicio que se ha implementado para añadir funcionalidad a la aplicación existente y que sirve como backend de la aplicación web, es el \textit{Servicio de monitorización web} que se puede observar en la sección nombrada, concretamente en la \hyperref[fig:PAServidor]{Figura 2.2}.\\
+De los servicios y eventos nombrados en la arquitectura detallada del PAServidor en la \hyperref[section-arquitectura]{sección 2.2}, el servicio que se ha implementado para añadir funcionalidad a la aplicación existente y que sirve como backend de la aplicación web, es el \textit{Servicio de monitorización web} que se puede observar en la sección nombrada, concretamente en la Figura \ref{fig:PAServidor}.\\
 
 %Explicar decisiones tomadas en la implementación del servicio
 Durante la implementación del servicio se han tomado distintas decisiones. Algunas de ellas se exponen a continuación.\\
 
 % - Carga de datos iniciales en vez de acceso siempre a base de datos
-Cuando un usuario inicia sesión en la aplicación web se envía una carga de datos iniciales con la información acerca de la configuración del centro (plantas con su información y sus planos), los clientes, los trabajadores, y las alertas actuales en el sistema. La decisión se toma valorando la cantidad de datos a enviar y el acceso a la base de datos. Se cree conveniente realizarlo de esta forma, para que la configuración esté al inicio en la aplicación y en el caso de los clientes y los trabajadores, para no realizar accesos a la base de datos cada vez que se tenga que enviar información actualizada de alertas, y sea la aplicación web la que complete dicha información. De esta manera el backend es más eficiente y los envíos de la información es más rápido, pero el frontend tiene que hacer cierto procesado con la información que le llega para completarla como se ha comentado anteriormente.\\
+Cuando un usuario inicia sesión en la aplicación web se envía una carga de datos iniciales con la información acerca de la configuración del centro (plantas con su información y sus planos), los clientes, los trabajadores, y las alertas actuales en el sistema. La decisión se toma valorando la cantidad de datos a enviar y el acceso a la base de datos. Se cree conveniente realizarlo de esta forma, para que la configuración esté al inicio en la aplicación y en el caso de los clientes y los trabajadores, para no realizar accesos a la base de datos cada vez que se tenga que enviar información actualizada de alertas, y sea la aplicación web la que complete dicha información. De esta manera el backend es más eficiente y el envío de la información es más rápido, pero el frontend tiene que hacer cierto procesado con la información que le llega para completarla como se ha comentado anteriormente.\\
 
 % - Decisión diccionarios y uso
 Como se ha mencionado en secciones anteriores, las presencias se mandan a todos los puestos, pero las alarmas se deben enviar a los puestos que cumplan ciertas reglas.
 
-Para saber a qué puestos se debe enviar una alarma, se recibe un evento con esa información, y se utiliza un diccionario cuya clave es cada uno de los puestos disponibles y el valor es un diccionario cuyas claves son los identificadores de las alarmas que deben ser enviadas a ese puesto. Por otro lado, se tiene otro diccionario cuya clave es el nombre del puesto y los valores son un diccionario cuyas claves son los identificadores de las alarmas y el valor son las alarmas (con la información concreta ya procesada) que se envían a cada puesto. Esto es así porque se reciben distintos tipos de eventos según sea para saber a qué puesto notificar en la web, actualización de una alarma, o fin de una alarma.
+Para saber a qué puestos se debe enviar una alarma, se recibe un evento con esa información y se utiliza un diccionario cuya clave es cada uno de los puestos disponibles y el valor es un diccionario cuyas claves son los identificadores de las alarmas que deben ser enviadas a ese puesto. Por otro lado, se tiene otro diccionario cuya clave es el nombre del puesto y los valores son un diccionario cuyas claves son los identificadores de las alarmas y el valor son las alarmas (con la información concreta ya procesada) que se envían a cada puesto. Esto es así porque se reciben distintos tipos de eventos según sea para saber a qué puesto notificar en la web, actualización de una alarma, o fin de una alarma.
 
 En el caso de las presencias se tiene un diccionario en el que la clave es el identificador de la presencia y el valor es la presencia a enviar.
 Se decide utilizar esta colección para almacenar los datos para que los accesos al insertar, actualizar o eliminar una alarma o presencia concreta sean más rápidos.
 Cabe destacar que el desarrollo se ha completado implementando también parte del procesado de alertas de tipo tareas con otro diccionario similar. (Se puede ver más información sobre esto en el \hyperref[section-gestion-proyecto]{capítulo 4} y la \hyperref[section-trabajo-futuro]{sección 5.3}).\\
 
-Para enviar la información de las alertas se barajó la opción de mandar solo la alerta actualizada y tener cierta lógica en el frontend, o si hacer la lógica completa y envío de todas las alertas actuales en el sistema desde el backend. Finalmente, se optó por esta segunda opción ya que se consideraba que para lo que se necesitaba en estos momentos era la mejor opción para no perder ningún dato si se desconectaba la web del servicio. Para la primera opción, la solución a esto hubiese sido que al reconectar se pidiera la información actual completa.\\
+Para enviar la información de las alertas se barajó la opción de mandar solo la alerta actualizada y tener cierta lógica en el frontend, o hacer la lógica completa y realizar el envío de todas las alertas actuales en el sistema desde el backend. Finalmente, se optó por esta segunda opción ya que se consideraba que para lo que se necesitaba en estos momentos era la mejor opción para no perder ningún dato si se desconectaba la web del servicio. Para la primera opción, la solución a esto hubiese sido que al reconectar se pidiera la información actual completa.\\
 
 % Diagrama de paquetes organización código backend
-Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código igual que en el frontend y por las mismas razones. Se puede ver la organización con una vista de módulos en forma de diagrama de paquetes. (Véase la Figura 3.2).\\
+Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hora de dividir los módulos para organizar el código igual que en el frontend y por las mismas razones. Se puede ver la organización con una vista de módulos en forma de diagrama de paquetes (véase la Figura \ref{fig:paquetes-backend}).\\
 
 \begin{figure}[H]
     \centering

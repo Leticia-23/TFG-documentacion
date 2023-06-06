@@ -8,7 +8,7 @@ El proyecto ha finalizado con éxito cumpliendo con los objetivos descritos en l
 
 Se ha desarrollado un sistema de información en forma de aplicación web que monitoriza en tiempo real alertas, ya sean presencias identificadas o no, o alarmas con sus distintos estados.\\
 
-Para esto se ha desarrollado desde cero el frontend de la aplicación; se han estudiado las distintas alternativas de arquitectura software, partiendo del esquema propuesto inicialmente por la empresa; se han analizado las opciones de comunicación para las distintas arquitecturas; y se ha implementado correctamente el backend de la aplicación añadiendo la lógica adicional necesaria en la aplicación existente. Todo esto aplicando las decisiones finales debatidas con la empresa referentes a la arquitectura del sistema y la comunicación entre el frontend y backend.
+Para esto se ha desarrollado desde cero el frontend de la aplicación; se han estudiado las distintas alternativas de arquitectura software partiendo del esquema propuesto inicialmente por la empresa; se han analizado las opciones de comunicación para las distintas arquitecturas; y se ha implementado correctamente el backend de la aplicación añadiendo la lógica adicional necesaria en la aplicación existente. Todo esto aplicando las decisiones finales debatidas con la empresa referentes a la arquitectura del sistema y la comunicación entre el frontend y backend.
  
 
 \section{Conocimientos adquiridos}
@@ -19,7 +19,7 @@ En esta sección se presentan los conocimientos técnicos y personales adquirido
 
 % Nuevas tecnologías, nuevos entornos de trabajo
 
-En cuanto a conocimientos técnicos, se destaca que para la parte de frontend se había trabajado anteriormente con \textit{React} por lo que se tenía experiencia previa en desarrollo de aplicaciones web con dicha tecnología, además de con los lenguajes de programación utilizados para esta parte del proyecto. Aunque se ha podido trabajar aspectos que anteriormente no habían sido abordados como trabajar con el mapeado de imágenes. \\
+En cuanto a conocimientos técnicos, se destaca que para la parte de frontend se había trabajado anteriormente con \textit{React} por lo que se tenía experiencia previa en desarrollo de aplicaciones web con dicha tecnología, además de con los lenguajes de programación utilizados para esta parte del proyecto. Aunque se han podido trabajar aspectos que anteriormente no habían sido abordados como trabajar con el mapeado de imágenes. \\
 
 Para el control de versiones ya se había trabajado con \textit{Git} y \textit{GitHub} anteriormente, por lo que ha sido fácil seguir trabajando con estas herramientas.\\
 
@@ -36,16 +36,16 @@ En cuanto a los conocimientos personales adquiridos, en primer lugar cabe mencio
 
 Cabe destacar principalmente que ha sido la primera experiencia laboral realizando un proyecto software en un entorno relacionado con el grado cursado, ya que se ha realizado este Trabajo de Fin de Grado como estudiante en prácticas en Ibernex. También ha sido un reto y un aprendizaje trabajar de forma remota por estar realizando el último año del grado en Kaunas, Lituania. Gracias a esto se ha aprendido a sobrellevar y solucionar las dificultades que se han tenido, sobre todo cuando surgían inconvenientes con la conexión a la red de la empresa, o la diferencia de poder consultar algo estando en la empresa rodeada del resto del equipo de desarrollo frente a estar a distancia y depender de distinto uso horario.\\
 
-Esta situación ha sido beneficiosa en el sentido en que que se han mejorado las habilidades de organización para lidiar con dichas dificultades, y mantener al mismo tiempo los compromisos académicos con la universidad de destino y laborales simultáneamente.
+Esta situación ha sido beneficiosa ya que se han mejorado las habilidades de organización para lidiar con dichas dificultades, y mantener al mismo tiempo los compromisos académicos con la universidad de destino y laborales simultáneamente.
 
 \section{Principales retos abordados}
 
-A continuación se destacan aquellos aspectos del proyecto que se consideran de mayor complejidad para haber sido abordados con la formación previa a comenzar el trabajom a realizar. 
+A continuación se destacan aquellos aspectos del proyecto que se consideran de mayor complejidad para haber sido abordados con la formación previa a comenzar el trabajo a realizar. 
 \begin{itemize}
     \item Integración del desarrollo software con un sistema ya desarrollado: en el grado se ha trabajado principalmente con proyectos desde cero o con la posibilidad de reescribir el código con el que se interaccionaba. Además la mayoría de las veces eran escenarios de laboratorio. En este proyecto se ha tenido que trabajar con un sistema que está en funcionamiento real y por lo tanto no hay opción de modificación para acomodar a otras restricciones.
     \item Trabajo con .NET y C\#: esta tecnología y este lenguaje no se utilizan en las asignaturas del grado. Por lo que aunque sea beneficioso conocer nuevas tecnologías, es un desafío comenzar a utilizarlas.
     \item Trabajo con una interfaz gráfica interactiva: durante el grado, las aplicaciones desarrolladas se han basado en trabajar principalmente con menús, por lo que ha sido novedoso trabajar con imágenes y el mapeado de estas para mostrar cierta información. Esto ha supuesto documentarse y buscar distintas opciones de implementación para quedarse con la opción que cumpliera mejor con los requisitos establecidos.
-    \item Enfrentarse a cambios durante el desarrollo: normalmente en las asignaturas se proponen ciertos requistos y se escogen las tecnologías y se trabaja partiendo de ese punto seguro. En este caso ha habido que enfrentarse a eliminar un requisito que se comenzó a implementar y a buscar una alternativa viable para solucionar la incompatibilidad de utilizar SignalR con las otras tecnologías propuestas.
+    \item Enfrentarse a cambios durante el desarrollo: normalmente en las asignaturas se proponen ciertos requisitos y se escogen las tecnologías y se trabaja partiendo de ese punto seguro. En este caso ha habido que enfrentarse a eliminar un requisito que se comenzó a implementar y a buscar una alternativa viable para solucionar la incompatibilidad de utilizar SignalR con las otras tecnologías propuestas.
 \end{itemize}
 
 
@@ -53,9 +53,9 @@ A continuación se destacan aquellos aspectos del proyecto que se consideran de 
 \label{section-trabajo-futuro}
 % Explicar que la aplicación desarrollada puede ser utilizada por Ibernex para reutilizar código o como prueba/base por si quieren sacar a producción trabajar con sistemas web finalmente ya que me explicaron que esto era como una pequeña prueba que querían hacer
 
-La implementación realizada solo incluye funcionalidad para monitorizar en la web los dos tipos de alerta comentados en secciones anteriores: las presencias y las alarmas.\\
+La implementación realizada solo incluye funcionalidad para monitorizar en la web los dos tipos de alertas comentados en secciones anteriores: las presencias y las alarmas.\\
 
-Inicialmente se incluía también la posibilidad de tener tareas como tipo de alerta, por lo que se comenzó parte de la implementación en backend para administrar la llegada de este tipo de eventos, y en frontend, el diseño de modelos e implementación del código se pensó de manera que fuera posible reutilizar o facilitar, sirviendo de base, algunos aspectos del código, como poder usar el mismo modelo de alerta con cualquier tipo. Esta funcionalidad no se completa por decisión e indicaciones de la empresa como se ha comentado en el \hyperref[section-gestion-proyecto]{capítulo 4}.
+Inicialmente se incluía también como objetivo la posibilidad de monitorizar tareas (otro tipo de alerta), por lo que se comenzó parte de la implementación en backend para administrar la llegada de este tipo de eventos, y en frontend, el diseño de modelos e implementación del código se pensó de manera que fuera posible reutilizar o facilitar, sirviendo de base algunos aspectos del código, como poder usar el mismo modelo de alerta con cualquier tipo. Esta funcionalidad no se completa por decisión e indicaciones de la empresa como se ha comentado en el \hyperref[section-gestion-proyecto]{capítulo 4}.
 Por esta razón una línea de trabajo futura, siguiendo el contexto del proyecto realizado, sería incluir las alertas en la aplicación web y que estas fueran igualmente monitorizadas. Para esto se tendría que continuar la implementación e incluir cierta funcionalidad tanto en backend como en frontend.\\
 
 Se destaca que la aplicación web desarrollada sirve de base y prueba a Ibernex para ver cómo es incluir la implementación web en la empresa y ver cómo funciona en este caso la monitorización de alertas. Por lo que, la principal línea futura de trabajo para la empresa, es que gracias a este proyecto pueden analizar si les sería interesante sacar a producción y comenzar a desarrollar soluciones de su aplicación compatibles con web.

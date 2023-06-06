@@ -1,13 +1,13 @@
 \chapter{Introducción}
 \label{ch:no_lineal}
 
-En este capítulo se presenta el contexto del trabajo, así como la motivación del problema concreto que se aborda. Se explica los objetivos y sus limitaciones, además de las herramientas de trabajo utilizadas. Por último, se explica el esquema general de la memoria del proyecto.
+En este capítulo se presenta el contexto del trabajo, así como la motivación del problema concreto que se aborda. Se explican los objetivos y sus limitaciones, además de las herramientas de trabajo utilizadas. Por último, se explica el esquema general de la memoria del proyecto.
 
 \section{Contexto de trabajo}
 
 % Explicar en qué trabaja la empresa, cómo trabaja, etc.
 
- Ibernex \cite{ibernex} es una empresa zaragonana especializada en el diseño, desarrollo e integración de soluciones y servicios tecnológicos destinados al sector sanitario y socio-sanitario. Estas soluciones se centran en automatizar y digitalizar la atención y experiencia de residencias u hospitales. La empresa cuenta con un largo recorrido de la mano del grupo Pikolín y recientemente se han incorporado dos nuevos accionistas mayoritarios con la intención de potenciar su presencia en el mercado internacional. Actualmente, Ibernex es líder en el sector en Iberia (España y Portugal) donde su principal core de negocio son los centros sociosanitaios, pero también alcanzó el 30\% de facturación en el mercado internacional durante el 2022, más concretamente en Latinoamérica potenciando la digitalización de los hospitales y ciudades de la salud. \\
+ Ibernex \cite{ibernex} es una empresa zaragonana especializada en el diseño, desarrollo e integración de soluciones y servicios tecnológicos destinados al sector sanitario y socio-sanitario. Estas soluciones se centran en automatizar y digitalizar la atención y experiencia de residencias u hospitales. La empresa cuenta con un largo recorrido de la mano del grupo Pikolín y recientemente se han incorporado dos nuevos accionistas mayoritarios con la intención de potenciar su presencia en el mercado internacional. Actualmente, Ibernex es líder en el sector en Iberia (España y Portugal) donde su principal core de negocio son los centros sociosanitaios, y también alcanzó el 30\% de facturación en el mercado internacional durante el 2022, más concretamente en Latinoamérica potenciando la digitalización de los hospitales y ciudades de la salud. \\
 
  Los clientes de la empresa, como se ha comentado anteriormente, son residencias u hospitales que quieren digitalizar el proceso de cuidado y atención de pacientes, además de otros procesos que puedan tener según sus necesidades. \\
 
@@ -18,7 +18,7 @@ La compañía realiza todo el proceso de construcción del producto. \\
 
 \begin{itemize}
     \item Por un lado, la fabricación del hardware que interactúa con el software. En esta parte se encuentran los terminales que están en las habitaciones de los pacientes. Estos terminales son pantallas en las que se pueden realizar distintas acciones como por ejemplo disparar y codificar alarmas, registrar presencias de trabajadores, registrar tareas u otras actividades según el sector en el que se encuentren.
-    \item Por otro lado, la implementación de Helpnex que es el software de gestión diseñado y desarrollado por Ibernex. Helpnex está diseñado para poder adaptarse a cada cliente ya sea por sus necesidades concretas, capacidades, como perfiles de trabajadores, entre otras.
+    \item Por otro lado, la implementación de Helpnex que es el software de gestión diseñado y desarrollado por Ibernex. Helpnex está diseñado para poder adaptarse a cada cliente ya sea por sus necesidades concretas, capacidades, como perfiles de trabajadores, entre otras características.
     Además, las soluciones que ofrecen también se pueden integrar con otros sistemas de gestión como Resiplus (muy presente en residencias que quieren transformarse y digitalizarse, pero mantener su programa de gestión). 
     La empresa se encuentra en continua innovación para seguir ofreciendo un sistema actualizado que ayude a optimizar la gestión de residencias y hospitales y así mejorar no solo la calidad de vida de los residentes y pacientes, sino también la labor de los trabajadores con el fin de que puedan invertir más tiempo en lo realmente importante, cuidar de las personas.
 \end{itemize}
@@ -26,7 +26,7 @@ La compañía realiza todo el proceso de construcción del producto. \\
 
 % Explicar el contexto de este TFG para la empresa
 
-Los clientes que tiene la compañía actualmente trabajan mayormente con aplicaciones de escritorio. Pero Ibernex considera que sería una buena opción que en residencias u hospitales se pueda monitorizar alarmas mediante la visualización de estas en pantallas. Para esto han considerado que una buena solución sería tener una aplicación web en la que se pueda visualizar en tiempo real las alertas de la institución.\\
+Los clientes que tiene la compañía actualmente trabajan mayormente con aplicaciones de escritorio. Pero Ibernex considera que sería una buena opción que en residencias u hospitales se puedan monitorizar alarmas mediante la visualización de estas en pantallas. Para esto han considerado que una buena solución sería tener una aplicación web en la que se puedan visualizar en tiempo real las alertas de la institución.\\
 
 En este contexto la parte del trabajo a realizar (que se explica con más detalle en la siguiente sección) es hacer modificaciones en la implementación de Helpnex e implementar el frontal web, que será el que reciba las alertas en tiempo real, separado de la aplicación actual.
 
@@ -57,7 +57,7 @@ Estas alertas pueden ser de dos tipos:
 Se tendrá en cuenta también que el inicio de sesión en la aplicación web se hará con las credenciales de usuario e indicando un puesto. Estos puestos son importantes ya que la información de las presencias se envían a todos los puestos, pero la información de las alarmas se filtra según el puesto.\\
 
 % Hetereogeneidad de tamaños
-Este sistema web servirá para pequeños y grandes escenarios. Es decir, será útil para una residencia pequeña en la que el número de clientes, habitaciones y por tanto terminales sea reducido. O el caso contrario en el que se quiera monitorizar las alertas de un hospital de gran tamaño con un alto número de clientes y terminales.\\
+Este sistema web servirá para pequeños y grandes escenarios. Es decir, será útil para una residencia pequeña en la que el número de pacientes, habitaciones y por tanto terminales sea reducido. O el caso contrario en el que se quiera monitorizar las alertas de un hospital de gran tamaño con un alto número de pacientes y terminales.\\
 
 
 La limitación a la hora de realizar el proyecto es que, al tener ya una aplicación desarrollada con ciertas tecnologías y modelos de datos, se debe realizar el análisis y diseño del sistema en base a esas condiciones y teniendo en cuenta las necesidades concretas de la empresa, que se podrán ver posteriormente en la sección de requisitos del sistema. \\
@@ -89,14 +89,14 @@ La estructura seguida en este documento es la siguiente:
     \item Previamente a esta sección se encuentran los agradecimentos y un resumen completo del proyecto realizado. A continuación el índice que resume esta sección.
     \item En este mismo capítulo se encuentran tres secciones distintas, además de esta misma. La primera, es el contexto del trabajo donde se explica qué empresa es Ibernex, cómo trabaja y quiénes son sus clientes, además de exponer cómo son sus soluciones y cómo encaja este proyecto en la empresa. La segunda, son los objetivos y limitaciones con los cuales se expone detalladamente qué es lo que se va a realizar y qué es lo que se va a conseguir al final y con qué limitaciones. Y por último, se exponen las herramientas de trabajo utilizadas durante el desarrollo del proyecto.
     \item En el segundo capítulo se detalla el análisis y diseño de la aplicación web. En la primera sección se encuentran los requisitos funcionales del sistema acordados con la empresa. En la segunda, se explica la arquitectura software del sistema con ayuda de un diagrama. En la tercera, se expone la información relevante a los modelos y base de datos que utiliza la empresa utilizados en el contexto de este proyecto. Y por último se puede observar la interfaz de usuario de la aplicación web.
-    \item En el tercer capítulo se pueden encontrar dos secciones en las que se proporciona de manera más detallada diversos aspectos de la implementación realizada para el frontend y backend respectivamente.
+    \item En el tercer capítulo se pueden encontrar dos secciones en las que se proporcionan de manera más detallada diversos aspectos de la implementación realizada para el frontend y backend respectivamente.
     \item En el cuarto capítulo se explica cómo se ha gestionado el proyecto, comentando la planificación inicial y final junto con un análisis explicativo de los posibles cambios.
     \item En el quinto capítulo se exponen las conclusiones del proyecto y se explica qué conocimientos se han adquirido, técnicamente y personalmente. Además, se proporciona información acerca de una continuación del trabajo en el futuro.
     \item Por último se puede encontrar detallada la bibliografía, la lista de figuras y la lista de tablas.
 \end{itemize}
 
 \newpage
-Adicionalmente, se incluyen los siguientes anexos que proporcionan mayor detalle, aclaraciones o explicaciones complementarias a los contenidos de los mencionados capítulos:
+Adicionalmente se incluyen los siguientes anexos que proporcionan mayor detalle, aclaraciones o explicaciones complementarias a los contenidos de los mencionados capítulos:
 
 \begin{itemize}
     \item Anexo A. Alternativas arquitecturas

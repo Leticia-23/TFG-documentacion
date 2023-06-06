@@ -1,14 +1,14 @@
 \chapter{Alternativas arquitecturas}
 \label{anexo-a}
 
-En el proceso de diseño de la arquitectura software del proyecto se evaluan distintas opciones con el objetivo de seleccionar la más adecuada para cumplir con los objetivos y requisitos de la empresa. Los principales motivos de este análisis son:
+En el proceso de diseño de la arquitectura software del proyecto se evalúan distintas opciones con el objetivo de seleccionar la más adecuada para cumplir con los objetivos y requisitos de la empresa. Los principales motivos de este análisis son:
 
 \begin{itemize}
     \item Tener o no un middleware que actúe de servidor web para comunicar la aplicación web y la aplicación existente de Ibernex (Helpnex).
-    \item El problema de compatibilidad de utilizar SignalR (Véase  \hyperref[anexo-b]{Anexo B}) para comunicar la aplicación de Ibernex y la aplicación web.
+    \item El problema de compatibilidad de utilizar SignalR (véase  \hyperref[anexo-b]{Anexo B}) para comunicar la aplicación de Ibernex y la aplicación web.
 \end{itemize}
 
-En un principio, el diseño de arquitetura propuesto por la empresa es el que se puede ver en la Figura A.1. Lo que proponían incluía un middleware para realizar una autenticación mediante API REST utilizando JWT (Véase \hyperref[anexo-c]{Anexo C}) y la comunicación entre los componentes de la arquitecura con websockets utilizando SignalR.  
+En un principio, el diseño de arquitetura propuesto por la empresa es el que se puede ver en la Figura A.1. Lo que proponían incluía un middleware para realizar una autenticación mediante API REST utilizando JWT (véase \hyperref[anexo-c]{Anexo C}) y la comunicación entre los componentes de la arquitecura con websockets utilizando SignalR.  
 
 \begin{figure}[!h]
     \centering
@@ -19,9 +19,9 @@ En un principio, el diseño de arquitetura propuesto por la empresa es el que se
 
 Durante el desarrollo del proyecto la empresa decide que no es necesario utilizar una autenticación por JWT en estos momentos, por lo que tener un middleware con API REST no tiene sentido si el resto de la comunicación se puede hacer por websockets.\\
 
-Ahora, lo que se necesita es la comunicación mediante websockets entre el nuevo servicio implementado en PAServidor y la aplicación web. La empresa había propuesto utilizar SignalR como tecnología para realizar dicha comunicación. El problema se encuentra cuando haciendo pruebas de funcionamiento, para utilizarla en la implementación, se ve la incompatibilidad de SignalR con .NET Framework 4.8 que es la tecnología con la que se implementa Helpnex.\\
+Ahora, lo que se necesita es la comunicación mediante websockets entre el nuevo servicio implementado en PAServidor y la aplicación web. La empresa había propuesto utilizar SignalR como tecnología para realizar dicha comunicación. El problema se encuentra, cuando haciendo pruebas de funcionamiento para utilizarla en la implementación, se ve la incompatibilidad de SignalR con .NET Framework 4.8 que es la tecnología con la que se implementa Helpnex.\\
 
-Por esta razón, se buscan alternativas para utilizar SignalR. Las propuesta que se le proponen a la empresa son: 
+Por esta razón, se buscan alternativas para utilizar SignalR. Las opciones que se le proponen a la empresa son: 
 \begin{enumerate}
     \item Seguir utilizando un Middleware (sin API REST) que siga utilizando SignalR para comunicarse con el frontend React y websockets (sin SignalR) para comunicarse con PAServidor.
     \item Realizar la comunicación entre aplicación web y servicio de PAServidor directamente con websockets sin utilizar SignalR.

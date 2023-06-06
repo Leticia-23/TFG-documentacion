@@ -7,9 +7,9 @@ SignalR \cite{signalr} es una biblioteca de código abierto que simplifica la ad
 
 En un principio SignalR es la opción a utilizar en la implementación propuesta por la empresa  para establecer la comunicación entre el backend y el frontend.\\
 
-La decisión de descartar SignalR se toma en el momento en el que se observa que no es compatible con .NET Framework 4.8 (y sí lo es con ASP.NET Core) y durante la evaluación de las distintas opciones de arquitecturas software para el sistema, explicadas con detalle en el \hyperref[anexo-a]{Anexo A}.\\
+La decisión de descartar SignalR se toma en el momento en el que se observa que no es compatible con .NET Framework 4.8 (y sí lo es con ASP.NET Core) y durante la evaluación de las distintas opciones de arquitecturas software para el sistema explicadas con detalle en el \hyperref[anexo-a]{Anexo A}.\\
 
-La razón de esta decisión es que, para utilizar SignalR, la arquitectura elegida debería de haber sido la que contiene un middleware entre el frontend y backend, de tal forma que este middleware estuviese implementado con ASP.NET Core para que fuese compatible.
-Con esta arquitectura la comunicación entre middleware y frontend podría haber sido totalmente compatible utilizando en React la librería \textit{microsoft/signalr} \cite{microsoft/signalr}. Pero para comunicar con el backend se debería de haber utilizado en la aplicación Helpnex otra librería para websockets como \textit{websocket-sharp} \cite{websocket-sharp} que es la finalmente escogida a utilizar teniendo en cuenta la arquitectura final elegida.\\
+La razón de esta decisión es que, para utilizar SignalR, la arquitectura elegida debería haber sido la que contiene un middleware entre el frontend y backend, de tal forma que este middleware estuviese implementado con ASP.NET Core para que fuese compatible.
+Con esta arquitectura la comunicación entre middleware y frontend podría haber sido totalmente compatible utilizando en React la librería \textit{microsoft/signalr} \cite{microsoft/signalr}. Pero para comunicar con el backend se debería haber utilizado en la aplicación Helpnex otra librería para websockets como \textit{websocket-sharp} \cite{websocket-sharp} que es la finalmente escogida a utilizar teniendo en cuenta la arquitectura final elegida.\\
 
 Por lo que se toma la decisión teniendo en cuenta utilizar o no SignalR y la elección de una arquitectura más compleja o más simple y que sea la más rentable en el momento para la empresa.
