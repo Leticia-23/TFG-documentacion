@@ -178,7 +178,7 @@ El funcionamiento para el caso de las presencias es el que se presenta en la Fig
 
 Con más detalle el comportamiento es el siguiente:
 \begin{enumerate}
-	\item Un trabajador se identifica en la habitación pasando su tarjeta personal por el lector o con introduciendo su PIN personal.
+	\item Un trabajador se identifica en la habitación pasando su tarjeta personal por el lector o introduciendo su PIN personal.
 	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien está presente.
 	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaPresencia} con toda la información relativa a la presencia.
 	\item El \textit{servicio de alarmas} que está suscrito al evento \textit{NuevaPresencia} recibe el evento y lo procesa. Como resultado envía un evento \textit{NotificarEstadoPresencias}.
