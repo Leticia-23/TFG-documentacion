@@ -5,7 +5,7 @@ En este capítulo se expone el análisis de requisitos funcionales, la arquitect
 \section{Requisitos del sistema}
 \label{section-requisitos}
 
-Seguidamente (véase tabla \ref{tab:RF}) se presentan, en modo de tabla, los principales requisitos del sistema. Para su formulación se ha partido de los detalles incluidos en la sección 1.2 y se ha trabajado directamente con la empresa.
+Seguidamente, se presentan, en modo de tabla, los principales requisitos del sistema. Para la formulación de los requisitos funcionales (véase tabla \ref{tab:RF}) se ha partido de los detalles incluidos en la sección 1.2 y se ha trabajado directamente con la empresa.
 
 % Tabla con los requisitos del sistema
 
@@ -14,11 +14,11 @@ Seguidamente (véase tabla \ref{tab:RF}) se presentan, en modo de tabla, los pri
 % \begin{tabular}{|p{1cm}|p{14cm}|}
 \begin{longtable}{|p{1cm}|p{14cm}|}
 	\hline
-	\textbf{ID} & \textbf{Requisito} \\
+	\multicolumn{1}{|c|}{\centering \textbf{ID}} & \multicolumn{1}{c|}{\centering \textbf{Requisito}} \\
 	\hline
 	RF-1 	& 	Un usuario iniciará sesión en el sistema utilizando un identificador de usuario (nickname), contraseña y puesto. \\
 	\hline
-	RF-2	&	Un usuario verá como opciones del campo puesto en la autenticación, las existentes en los recursos de ese tipo de la base de datos. En caso de que no exista ningún recurso de ese tipo, verá la opción "Puesto único".	\\
+	RF-2	&	Un usuario verá como opciones del campo puesto en la autenticación las existentes en los recursos de ese tipo de la base de datos (fijados desde otra aplicación de Ibernex). En caso de que no exista ningún recurso de ese tipo, verá la opción "Puesto único".	\\
 	\hline
 	RF-3	&	Un usuario podrá cerrar su sesión.	\\
 	\hline
@@ -72,7 +72,7 @@ Los requisitos no funcionales definen los atributos de calidad del sistema descr
 
 \begin{longtable}{|p{1,2cm}|p{13,8cm}|}
 	\hline
-	\textbf{ID} & \textbf{Requisito} \\
+	\multicolumn{1}{|c|}{\centering \textbf{ID}} & \multicolumn{1}{c|}{\centering \textbf{Requisito}} \\
 	\hline
 	RNF-1 	& 	Será necesario disponer de conexión a la LAN en la que esté instalada el sistema. \\
 	\hline
@@ -131,12 +131,60 @@ Para entender mejor la arquitectura del PAServidor se proporciona un diagrama m�
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth,height=16cm]{Imagenes/Arquitectura-PAServidor}
+    \includegraphics[width=12cm]{Imagenes/Arquitectura-PAServidor}
     \caption{Diagrama arquitectura PAServidor}
     \label{fig:PAServidor}
 \end{figure}
 
-Se puede ver el comportamiento de esta arquitectura en el contexto de este proyecto en la \hyperref[subsection-comportamiento]{sección 3.2.1}.
+
+% Explicar comportamiento de servicios y eventos
+\section{Comportamiento servicios y eventos}
+% TODO: DIAGRAMAS DE COMPORTAMIENTO para mostrar ejemplo/s de funcionamiento interno.
+Respecto al comportamiento de los servicios y eventos implicados, a continuación se exponen uno ejemplo de funcionamiento tanto para alarma como para presencia.\\
+
+El funcionamiento para el caso de las alarmas es el que se presenta en la \hyperref[fig:flujograma-alarmas]{Figura 2.3}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{Imagenes/Flujograma-alarmas.png}
+    \caption{Diagrama de comportamiento - Alarmas}
+    \label{fig:flujograma-alarmas}
+\end{figure}
+
+Con más detalle el comportamiento es el siguiente:
+\begin{enumerate}
+	\item El paciente pulsa el botón del terminal para solicitar ayuda.	
+	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien ha pulsado el botón.
+	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaAlarma} con toda la información relativa al terminal.
+	\item El \textit{servicio de alarmas}, que está suscrito al evento \textit{NuevaAlarma}, recibe el evento y lo procesa. Como resultado envía un evento \textit{NuevaAccionPendiente} y \textit{NotificarAlarmaEnMonitorWeb}.
+	\item El \textit{servicio de monitorización web} en primer lugar recibe el evento \textit{NuevaAccionPendiente} al que está suscrito pero se ignora ya que aún no se ha recibido el evento \textit{NotificarAlarmaEnMonitorWeb}. Seguido se recibe el evento \textit{NotificarAlarmaEnMonitorWeb} y se procesa, envíando mediante websocket la información conveniente a la aplicación web.
+	\item En la aplicación web aparece la nueva alarma. Después se efectuará una presencia en el terminal. (Véase el comportamiento específico para las presencias).
+	\item El \textit{servicio de monitorización web} recibe un evento \textit{NuevaAccionPendiente} cuando se actualiza la alarma y lo procesa si ha llegado el evento \textit{NotificarAlarmaEnMonitorWeb} para actualizar la alarma indicada. El resultado de la actualización es envíado mediante el websocket a la aplicación web.
+	\item En la aplicación web aparece la alarma actualizada y después en el terminal un trabajador codifica la alarma y elimina su presencia. (Véase el comportamiento específico para las presencias).
+	\item El \textit{servicio de monitorización web} recibe el evento \textit{DisparoAvisoFinalizado} cuando se codifica una alarma y lo procesa si le ha llegado el evento de \textit{NotificarAlarmaEnMonitorWeb} para eliminar la alarma indicada. El resultado de la actualización de las alarmas en el sistema es envíado mediante el websocket a la aplicación web.
+	\item En la aplicación web desaparece la alarma actualizada.
+\end{enumerate}
+
+
+\newpage
+El funcionamiento para el caso de las presencias es el que se presenta en la \hyperref[fig:flujograma-alarmas]{Figura 2.4}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{Imagenes/Flujograma-presencias.png}
+    \caption{Diagrama de comportamiento - Presencias}
+    \label{fig:flujograma-presencias}
+\end{figure}
+
+Con más detalle el comportamiento es el siguiente:
+\begin{enumerate}
+	\item Un trabajador se identifica en la habitación pasando su tarjeta personal por el lector o con el su PIN.
+	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien está presente.
+	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaPresencia} con toda la información relativa a la presencia.
+	\item El \textit{servicio de alarmas} que está suscrito al evento \textit{NuevaPresencia} recibe el evento y lo procesa. Como resultado envía un evento \textit{NotificarEstadoPresencias}.
+	\item El \textit{servicio de monitorización web} recibe el evento \textit{NotificarEstadoPresencias} que puede ser de las presencias actuales, de una presencia nueva, actualizada o eliminada y lo procesa. Como resultado envía la información necesaria mediante el websocket a la aplicación web.
+	\item En la aplicación web aparece, se actualiza o desaparece la presencia.
+\end{enumerate}
 
 \section{Base de datos}
 
@@ -144,57 +192,68 @@ Se puede ver el comportamiento de esta arquitectura en el contexto de este proye
 
 Para llevar a cabo el desarrollo, fue proporcionada por parte de la empresa una base de datos de prueba configurada siguiendo el modelo de datos existente de la aplicación de Ibernex.\\
 
-Parte de la información que se tiene que enviar a la web se puede obtener de los eventos que se reciben en el servicio, pero para obtener otros datos es necesario acceder a la base de datos. A continuación se exponen los diagramas de la base de datos utilizados en el contexto de este proyecto. Estos diagramas han sido realizados con la aplicación Microsoft SQL Server Management Studio \cite{sql-server-studio}.
+Parte de la información que se tiene que enviar a la web se puede obtener de los eventos que se reciben en el servicio, pero para obtener otros datos es necesario acceder a la base de datos. A continuación se exponen los diagramas de la base de datos utilizados en el contexto de este proyecto. Estos diagramas han sido realizados con la aplicación Microsoft SQL Server Management Studio \cite{sql-server-studio}. \\
 
-\begin{itemize}
-	\item En la Figura 2.3 se observa el diagrama de la parte del login y la información de los trabajadores.
-	\item En la Figura 2.4 se observa el diagrama de los pacientes de la institución.
-	\item En la Figura 2.5 se observa el diagrama necesario para procesar las alarmas.
-	\item En la Figura 2.6 se observa el diagrama necesario para procesar las presencias.
-\end{itemize}
+En la Figura 2.5 se presenta la parte del modelo correspondiente a los trabajadores y la información necesaria para realizar el login. El trabajador se define como un usuario del sistema de monitorización web. Se observa que la mayor parte de información personal de estos se encuentra en la tabla persona que se comparte con otras entidades de la base de datos. La tabla de imagenes proporciona la foto que identifica al trabajador.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{Imagenes/Diagrama-BD-Login}
+    \includegraphics[width=16cm]{Imagenes/Diagrama-BD-Login}
     \caption{Diagrama base de datos - Trabajadores}
     \label{fig:Diagrama-BD-Login}
 \end{figure}
 
+\newpage
+En la Figura 2.6 se presenta la parte del modelo correspondiente a los clientes, es decir, a los pacientes de la institución sanitaria. Se observa como en este modelo se encuentra tanto la información personal del paciente (en la tabla de personas de igual forma que con los trabajadores) como la información relacionada con la ubicación del paciente dentro de la institución. En este caso la tabla de imagenes proporciona la foto que identifica al paciente y en el caso de las zonas, el plano de la planta en la que se encuentra el paciente.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{Imagenes/Diagrama-BD-Clientes}
+    \includegraphics[width=16cm]{Imagenes/Diagrama-BD-Clientes}
     \caption{Diagrama base de datos - Clientes}
     \label{fig:Diagrama-BD-Clientes}
 \end{figure}
 
+\newpage
+En la Figura 2.7 se presenta la parte del modelo en la que se encuentra toda la información de las alarmas en el sistema. De las tablas de este diagrma se obtiene la información necesaria a procesar en los distintos servicios y enviar la información necesaria en los eventos correspondientes en Helpnex. En otros casos es necesario realizar accesos a la base de datos para obtener la información necesaria a monitorizar en la web.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{Imagenes/Diagrama-BD-Alertas}
+    \includegraphics[width=16cm]{Imagenes/Diagrama-BD-Alertas}
     \caption{Diagrama base de datos - Alarmas}
     \label{fig:Diagrama-BD-}
 \end{figure}
 
+\newpage
+En la Figura 2.8 se presenta la parte del modelo correspondiente a la información de las presencias en el sistema. De igual forma que el diagrama anterior, en estas tablas se ve reflejada la información necesaria a procesar en los servicios para enviar la información en los eventos relacionados con las presencias o la información necesaria que hay que obtener para monitorizarla en la web si no llega en el evento recibido.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=15cm]{Imagenes/Diagrama-BD-Presencias}
+    \includegraphics[width=16cm]{Imagenes/Diagrama-BD-Presencias}
     \caption{Diagrama base de datos - Presencias}
     \label{fig:Diagrama-BD-Presencias}
 \end{figure}
-
-% TODO: INCLUIR EN EL ESQUEMA DEL LOGIN LA TABLA DE LOS RECURSOS DONDE ESTARÁN LOS PUESTOS
 
 
 \section{Interfaz de usuario}
 \label{section-ui}
 % Poner la interfaz final del usuario cuando esté terminada
 
-En esta sección se puede observar la interfaz de usuario final de la aplicación.\\
+En esta sección se explica la interfaz de usuario final de la aplicación y en el \hyperref[anexo-e]{Anexo E} se puede observar más ejemplos de dicha interfaz.\\
 
-En la \hyperref[fig:login]{Figura 2.7} se observa la pantalla de inicio de sesión.
 
-En la \hyperref[fig:map]{Figura 2.8}  se observa la pantalla principal donde se puede ver la distribución de plantas, el plano de la planta seleccionada y el carrusel con las alertas de la planta seleccionada.
+Al iniciar la aplicación, si el navegador no tiene una sesión iniciada, el sistema carga la pantalla de inicio de sesión de la \hyperref[fig:map]{Figura 2.9}. \\ 
 
-En la \hyperref[fig:list]{Figura 2.9}  se observa la pantalla principal que contiene la lista de alarmas totales actualmente en el sistema.
+En caso de que exista un usuario con una sesión iniciada, el sistema carga como pantalla principal la de la \hyperref[fig:map]{Figura 2.10}. Esta pantalla muestra las distintas plantas existentes en la institución y la cantidad de alarmas o presencias activas en dicha planta. En la parte superior se observa el carrusel con las alertas activas en el sistema pertenecientes a la planta seleccionada. A la derecha se observa el plano de la planta seleccionada. En este plano además se muestra la información referente a la ubicación de alarmas y presencias. En cada habitación, si hay alguna alerta activa se colorea el espacio y se muestra un icono de la alerta con más prioirdad de las existentes en el carrusel pertenecientes a dicha habitación, coloreandola según el tipo de alerta (alarma o presencia) y su estado (en caso de ser alarma) siguiendo este orden de prioridad:
+\begin{enumerate}
+	\item Rojo: alerta de tipo alarma y estado disparada
+	\item Amarillo: alerta de tipo alarma y estado aceptada
+	\item Azul: alerta de tipo alarma y estado atendida
+	\item Verde: alerta de tipo presencia
+\end{enumerate}
+Si se clica en el icono que aparece en la habitación, se muestra una ventana emergente con la misma información que se puede encontrar en el carrusel sobre esa alerta.\\
+
+En el menú lateral de la pantalla mencionada, si se selecciona la opción de listado de alertas, se navega a la pantalla de la \hyperref[fig:list]{Figura 2.11}. Aquí se muestra una tabla con las alarmas activas existentes y ordenadas por prioridad según la fecha y hora. Tal y como se puede observar, se presenta el tipo de alerta, fecha y hora de generación, zona y paciente. En la parte superior se muestra el número total de alarmas y presencias en todas las plantas. Desde esta pantalla se puede volver al plano de alertas seleccionando la opción del menú lateral correspondiente.
+
 
 \newpage
 

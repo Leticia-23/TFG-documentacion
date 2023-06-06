@@ -99,37 +99,6 @@ Durante el desarrollo de la aplicación se ha seguido cierta estructura a la hor
 
 Se observa como se tiene un módulo principal \textbf{Servicio\_MonitorizacionWeb} que es donde se procesa la llegada de eventos. Por otro lado se tiene el módulo \textbf{Server} donde se encuentra la lógica para recibir y enviar información a la aplicación web. Los módulos \textbf{Helpers} y \textbf{Models} son utilizados por los dos anteriores.\\
 
-% Explicar comportamiento de servicios y eventos
-\subsection{Comportamiento servicios y eventos}
-\label{subsection-comportamiento}
-% TODO: DIAGRAMAS DE COMPORTAMIENTO para mostrar ejemplo/s de funcionamiento interno.
-Respecto al comportamiento de los servicios y eventos implicados, a continuación se exponen uno ejemplo de funcionamiento tanto para alarma como para presencia.\\
-
-El funcionamiento para el caso de las alarmas es el siguiente:
-\begin{enumerate}
-	\item El paciente pulsa el botón del terminal para solicitar ayuda.	
-	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien ha pulsado el botón.
-	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaAlarma} con toda la información relativa al terminal.
-	\item El \textit{servicio de alarmas}, que está suscrito al evento \textit{NuevaAlarma}, recibe el evento y lo procesa. Como resultado envía un evento \textit{NuevaAccionPendiente} y \textit{NotificarAlarmaEnMonitorWeb}.
-	\item El \textit{servicio de monitorización web} en primer lugar recibe el evento \textit{NuevaAccionPendiente} al que está suscrito pero se ignora ya que aún no se ha recibido el evento \textit{NotificarAlarmaEnMonitorWeb}. Seguido se recibe el evento \textit{NotificarAlarmaEnMonitorWeb} y se procesa, envíando mediante websocket la información conveniente a la aplicación web.
-	\item En la aplicación web aparece la nueva alarma. Después se efectuará una presencia en el terminal. (Véase el comportamiento específico para las presencias).
-	\item El \textit{servicio de monitorización web} recibe un evento \textit{NuevaAccionPendiente} cuando se actualiza la alarma y lo procesa si ha llegado el evento \textit{NotificarAlarmaEnMonitorWeb} para actualizar la alarma indicada. El resultado de la actualización es envíado mediante el websocket a la aplicación web.
-	\item En la aplicación web aparece la alarma actualizada y después en el terminal un trabajador codifica la alarma y elimina su presencia. (Véase el comportamiento específico para las presencias).
-	\item El \textit{servicio de monitorización web} recibe el evento \textit{DisparoAvisoFinalizado} cuando se codifica una alarma y lo procesa si le ha llegado el evento de \textit{NotificarAlarmaEnMonitorWeb} para eliminar la alarma indicada. El resultado de la actualización de las alarmas en el sistema es envíado mediante el websocket a la aplicación web.
-	\item En la aplicación web desaparece la alarma actualizada.
-\end{enumerate}
-
-El funcionamiento para el caso de las presencias es el siguiente:
-
-\begin{enumerate}
-	\item Un trabajador se identifica en la habitación pasando su tarjeta personal por el lector o con el su PIN.
-	\item El terminal notifica al \textit{servicio de comunicación con terminales}, mediante el socket, que alguien está presente.
-	\item El \textit{servicio de comunicación con terminales} envía un evento \textit{NuevaPresencia} con toda la información relativa a la presencia.
-	\item El \textit{servicio de alarmas} que está suscrito al evento \textit{NuevaPresencia} recibe el evento y lo procesa. Como resultado envía un evento \textit{NotificarEstadoPresencias}.
-	\item El \textit{servicio de monitorización web} recibe el evento \textit{NotificarEstadoPresencias} que puede ser de las presencias actuales, de una presencia nueva, actualizada o eliminada y lo procesa. Como resultado envía la información necesaria mediante el websocket a la aplicación web.
-	\item En la aplicación web aparece, se actualiza o desaparece la presencia.
-\end{enumerate}
-
 
 
 
